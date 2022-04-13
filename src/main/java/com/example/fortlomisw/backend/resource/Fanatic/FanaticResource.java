@@ -9,19 +9,19 @@ public class FanaticResource {
 
     private Long id;
 
-    private String UserName;
+    private String username;
 
-    private String UserRealName;
+    private String realname;
 
-    private String UserLastName;
+    private String lastname;
 
-    private String UserEmail;
+    private String email;
 
-    private String UserPassword;
+    private String password;
 
     private byte[] content;
 
-    private String FanaticAlias;
+    private String fanaticalias;
 
 
 

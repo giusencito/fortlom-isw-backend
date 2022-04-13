@@ -28,14 +28,14 @@ public class Forum {
     @NotBlank
     @Size(max = 20)
     @Column(unique = true)
-    private String ForumName;
+    private String forumname;
 
 
 
     @NotNull
     @NotBlank
     @Size(max = 200)
-    private String ForumDescription;
+    private String forumdescription;
 
 
     @ManyToOne(targetEntity = Person.class)

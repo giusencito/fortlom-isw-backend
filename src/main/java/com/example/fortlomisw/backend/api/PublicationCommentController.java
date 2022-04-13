@@ -4,8 +4,8 @@ package com.example.fortlomisw.backend.api;
 import com.example.fortlomisw.backend.domain.model.entity.PublicationComment;
 import com.example.fortlomisw.backend.domain.service.PublicationCommentService;
 import com.example.fortlomisw.backend.mapping.PublicationCommentMapper;
+import com.example.fortlomisw.backend.resource.PublicationComment.CreatePublicationComment;
 import com.example.fortlomisw.backend.resource.PublicationComment.PublicationCommentResource;
-import com.example.fortlomisw.backend.resource.PublicationComment.CreatePublicationResource;
 import com.example.fortlomisw.backend.resource.PublicationComment.UpdatePublicationComment;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -40,7 +40,7 @@ public class PublicationCommentController {
     }
 
     @PostMapping("/users/{userId}/publications/{publicationId}/comments")
-    public PublicationCommentResource createComment(@PathVariable Long userId, @PathVariable Long publicationId, @RequestBody CreatePublicationResource request) {
+    public PublicationCommentResource createComment(@PathVariable Long userId, @PathVariable Long publicationId, @RequestBody CreatePublicationComment request) {
         PublicationComment comment = mapping.map(request, PublicationComment.class);
         return mapping.map(commentService.create(userId, publicationId, comment), PublicationCommentResource.class);
     }

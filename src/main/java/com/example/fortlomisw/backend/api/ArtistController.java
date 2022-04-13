@@ -1,6 +1,7 @@
 package com.example.fortlomisw.backend.api;
 
 
+import com.example.fortlomisw.backend.domain.model.entity.Artist;
 import com.example.fortlomisw.backend.domain.service.ArtistService;
 import com.example.fortlomisw.backend.mapping.ArtistMapper;
 import com.example.fortlomisw.backend.resource.Artist.ArtistResource;
@@ -34,6 +35,10 @@ public class ArtistController {
     public ArtistResource getUserById(@PathVariable("artistId") Long artistId) {
         return mapper.toResource(artistService.getById(artistId));
     }
+    @GetMapping("/name/{artistname}")
+    public ArtistResource getUserByartistname(@PathVariable("artistname") String artistname) {
+        return mapper.toResource(artistService.getbyNombreUsuario(artistname));
+    }
     @PostMapping
     public ArtistResource createUser(@RequestBody CreateArtistResource request) {
 
@@ -42,6 +47,19 @@ public class ArtistController {
     @PutMapping("{artistId}")
     public ArtistResource updateUser(@PathVariable Long artistId, @RequestBody UpdateArtistResource request) {
         return mapper.toResource(artistService.update(artistId, mapper.toModel(request)));
+    }
+    @PutMapping("/artist/{artistId}/InstagramAccount")
+    public ArtistResource updateInstagramAccount(@PathVariable Long artistId, @RequestBody UpdateArtistResource request){
+        return mapper.toResource(artistService.setInstagramAccount(artistId,mapper.toModel(request)));
+
+    }
+    @PutMapping("/artist/{artistId}/TwitterAccount")
+    public ArtistResource updateTwitterAccount(@PathVariable Long artistId, @RequestBody UpdateArtistResource request){
+        return mapper.toResource(artistService.setTwitterAccount(artistId,mapper.toModel(request)));
+    }
+    @PutMapping("/artist/{artistId}/FacebookAccount")
+    public ArtistResource updateFacebookAccount(@PathVariable Long artistId, @RequestBody UpdateArtistResource request){
+        return mapper.toResource(artistService.setFacebookAccount(artistId,mapper.toModel(request)));
     }
     @DeleteMapping("{artistId}")
     public ResponseEntity<?> deletePost(@PathVariable Long artistId) {

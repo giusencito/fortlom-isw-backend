@@ -14,11 +14,11 @@ public class ForumCommentResource {
 
     private Long id;
 
-    private String CommentDescription;
+    private String commentdescription;
 
     private Date registerdate;
 
-    private PersonResource user;
+    private PersonResource person;
 
     private ForumResource forum;
 

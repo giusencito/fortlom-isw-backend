@@ -1,22 +1,32 @@
 package com.example.fortlomisw.backend.service;
 
+import com.example.fortlomisw.backend.Image.ImageModel;
+import com.example.fortlomisw.backend.Image.ImageUtility;
 import com.example.fortlomisw.backend.domain.model.entity.Multimedia;
 import com.example.fortlomisw.backend.domain.persistence.MultimediaRepository;
 import com.example.fortlomisw.backend.domain.persistence.PublicationRepository;
 import com.example.fortlomisw.backend.domain.service.MultimediaService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Validator;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MultimediaServiceImpl implements MultimediaService {
+
+
+
+
 
 
     private static final String ENTITY = "Multimedia";
@@ -25,13 +35,20 @@ public class MultimediaServiceImpl implements MultimediaService {
 
     private final PublicationRepository publicationRepository;
 
+
+
+
+
     private final Validator validator;
 
     public MultimediaServiceImpl(MultimediaRepository multimediaRepository, PublicationRepository publicationRepository, Validator validator) {
         this.multimediaRepository = multimediaRepository;
         this.publicationRepository = publicationRepository;
         this.validator = validator;
+
     }
+
+
 
 
     @Override
@@ -51,20 +68,50 @@ public class MultimediaServiceImpl implements MultimediaService {
     }
 
     @Override
-    public Multimedia create(Long publicationId, Multimedia request, MultipartFile file) throws IOException {
-        request.setContent(file.getBytes());
+    public ImageModel getImageDetails(Long MultimediaID) {
+        Optional<Multimedia>dbImage=multimediaRepository.findById(MultimediaID);
+        ImageModel imageModel= new ImageModel(dbImage.get().getId(),dbImage.get().getType(),ImageUtility.decompressImage(dbImage.get().getContent()));
+        return imageModel;
+    }
 
-        return publicationRepository.findById(publicationId)
-                .map(publications -> {
-                    request.setPublication(publications);
-                    return multimediaRepository.save(request);
-                })
-                .orElseThrow(() -> new ResourceNotFoundException("Publication", publicationId));
+    @Override
+    public ResponseEntity<byte[]> getImage(Long MultimediaID) {
+        Optional<Multimedia>dbImage=multimediaRepository.findById(MultimediaID);
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.valueOf(dbImage.get().getType()))
+                .body(ImageUtility.decompressImage(dbImage.get().getContent()));
+
 
     }
 
+    @Override
+    public void create(Long publicationId, MultipartFile file) throws IOException {
+        Multimedia request = new Multimedia();
+        request.setType(file.getContentType());
+
+        request.setContent(ImageUtility.compressImage(file.getBytes()));
+
+         publicationRepository.findById(publicationId)
+                .map(publications -> {
+                    request.setPublication(publications);
+                     multimediaRepository.save(request);
+                    return ResponseEntity.ok().build();
+                })
+                 .orElseThrow(() -> new ResourceNotFoundException("Publication", publicationId));
 
 
+    }
+
+    @Override
+    public ResponseEntity<ByteArrayResource> download(Long filenameId) {
+        Multimedia multimedia=getById(filenameId);
+        multimedia.setContent(ImageUtility.decompressImage(multimedia.getContent()));
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(multimedia.getType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+multimedia.getId()+"\"")
+                .body(new ByteArrayResource(multimedia.getContent()));
+    }
 
 
     @Override
@@ -73,8 +120,15 @@ public class MultimediaServiceImpl implements MultimediaService {
     }
 
     @Override
-    public List<Multimedia> getMultimediaByPublicationId(Long multimediaId) {
-        return multimediaRepository.findByPublicationId(multimediaId);
+    public List<ImageModel> getMultimediaByPublicationId(Long multimediaId) {
+        List<Multimedia> multimedias=multimediaRepository.findByPublicationId(multimediaId);
+        List<ImageModel>imageModels = new ArrayList<>() ;
+        for (int i=0;i<multimedias.size();i++){
+            Multimedia multimedia=multimedias.get(i);
+            ImageModel imageModel= new ImageModel(multimedia.getId(),multimedia.getType(),ImageUtility.decompressImage(multimedia.getContent()));
+            imageModels.add(imageModel);
+        }
+        return imageModels;
     }
 
     @Override

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import javax.validation.Validator;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -53,12 +54,14 @@ public class ForumCommentServiceImpl implements ForumCommentService {
 
     @Override
     public ForumComment create(Long userId, Long forumId, ForumComment request) {
+        Date date = new Date();
         Person user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Person", userId));
         return forumRepository.findById(forumId)
                 .map(forums -> {
                     request.setForum(forums);
                     request.setPerson(user);
+                    request.setRegisterdate(date);
                     return forumcommentRepository.save(request);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Forum", forumId));

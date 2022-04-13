@@ -10,8 +10,8 @@ import java.util.Date;
 @Getter
 public class PublicationResource {
     private Long id;
-    private String PublicationName;
-    private String PublicationDescription;
+    private String publicationName;
+    private String publicationDescription;
     private Long likes;
     private Date date;
     private ArtistResource artist;

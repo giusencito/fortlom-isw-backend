@@ -17,7 +17,7 @@ public interface FanaticService {
     boolean existsByNombreUsuario(String nombreUsuario);
     boolean existsByEmail(String email);
     void save(Fanatic artist);
-    Optional<Fanatic> getbyNombreUsuario(String nombreUsuario);
+    Fanatic getbyNombreUsuario(String nombreUsuario);
     Optional<Fanatic>getbyNombreUsuarioOrEmail(String nombreOremail);
     Fanatic create(Fanatic artist);
 }

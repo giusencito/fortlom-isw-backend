@@ -51,4 +51,7 @@ public class MappingConfiguration {
 
     @Bean
     public MultimediaMapper multimediaMapper(){ return new MultimediaMapper(); }
+
+    @Bean
+    public PersonMapper personMapper(){ return new PersonMapper(); }
 }

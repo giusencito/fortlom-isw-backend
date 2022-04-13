@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class ForumResource {
     private Long id;
-    private String ForumName;
-    private String ForumDescription;
-    private PersonResource user;
+    private String forumname;
+    private String forumdescription;
+    private PersonResource person;
 }

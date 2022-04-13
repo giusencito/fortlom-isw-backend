@@ -60,7 +60,15 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event updateEvent(Long eventId, Event request) {
-        return null;
+
+        return eventRepository.findById(eventId).map(post->{
+            post.setEventlikes(request.getEventlikes());
+            eventRepository.save(post);
+            return  post;
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, eventId));
+
+
+
     }
 
     @Override

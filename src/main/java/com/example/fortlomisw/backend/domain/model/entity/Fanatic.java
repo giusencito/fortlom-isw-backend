@@ -22,7 +22,7 @@ public class Fanatic  extends Person{
     @NotBlank
     @Size(max = 30)
     @Column(unique = true)
-    private String FanaticAlias;
+    private String fanaticalias;
 
 
     @OneToMany(targetEntity = Rate.class,cascade = CascadeType.ALL)

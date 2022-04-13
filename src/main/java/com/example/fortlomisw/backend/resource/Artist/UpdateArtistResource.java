@@ -9,13 +9,18 @@ public class UpdateArtistResource {
 
     private String UserName;
 
-    private String UserRealName;
+    private String realname;
 
-    private String UserLastName;
+    private String lastname;
 
-    private String UserEmail;
+    private String email;
 
-    private String UserPassword;
+    private String password;
 
-    private Long ArtistFollowers;
+    private Long artistfollowers;
+    private String instagramLink;
+
+    private String facebookLink;
+
+    private String twitterLink;
 }

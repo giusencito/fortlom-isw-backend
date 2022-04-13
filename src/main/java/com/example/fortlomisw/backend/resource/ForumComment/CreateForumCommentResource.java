@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class CreateForumCommentResource {
-    private String CommentDescription;
+    private String commentdescription;
 
     private Date registerdate;
 }

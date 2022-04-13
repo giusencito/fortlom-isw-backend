@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateReportResource {
-    private String ReportDescription;
+    private String reportDescription;
 }

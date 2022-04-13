@@ -12,6 +12,7 @@ public interface PublicationService {
     Publication getById(Long publicationId);
     Publication create(Long artistId, Publication publication);
     Publication update(Long publicationId, Publication request);
+
     List<Publication> getPublicationByArtistId(Long artistId);
     ResponseEntity<?> delete(Long publicationId);
 

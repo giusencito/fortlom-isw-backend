@@ -2,7 +2,7 @@ package com.example.fortlomisw.backend.mapping;
 
 
 import com.example.fortlomisw.backend.domain.model.entity.PublicationComment;
-import com.example.fortlomisw.backend.resource.PublicationComment.CreatePublicationResource;
+import com.example.fortlomisw.backend.resource.PublicationComment.CreatePublicationComment;
 import com.example.fortlomisw.backend.resource.PublicationComment.PublicationCommentResource;
 import com.example.fortlomisw.backend.resource.PublicationComment.UpdatePublicationComment;
 import com.example.fortlomisw.shared.mapping.EnhancedModelMapper;
@@ -26,7 +26,7 @@ public class PublicationCommentMapper implements Serializable{
     public Page<PublicationCommentResource> modelListToPage(List<PublicationComment> modelList, Pageable pageable) {
         return new PageImpl<>(mapper.mapList(modelList, PublicationCommentResource.class), pageable, modelList.size());
     }
-    public PublicationComment toModel(CreatePublicationResource resource) {
+    public PublicationComment toModel(CreatePublicationComment resource) {
         return mapper.map(resource, PublicationComment.class);
     }
 

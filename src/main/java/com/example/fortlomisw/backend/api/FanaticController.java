@@ -34,6 +34,10 @@ public class FanaticController {
     public FanaticResource getUserById(@PathVariable("fanaticId") Long fanaticId) {
         return mapper.toResource(fanaticService.getById(fanaticId));
     }
+    @GetMapping("/name/{fanaticname}")
+    public FanaticResource getUserByfanaticname(@PathVariable("fanaticname") String fanaticname) {
+        return mapper.toResource(fanaticService.getbyNombreUsuario(fanaticname));
+    }
     @PostMapping
     public FanaticResource createUser(@RequestBody CreateFanaticResource request) {
 

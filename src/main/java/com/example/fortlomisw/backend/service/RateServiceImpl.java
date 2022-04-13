@@ -63,7 +63,15 @@ public class RateServiceImpl implements RateService {
 
     @Override
     public Rate update(Long rateId, Rate request) {
-        return null;
+
+        return rateRepository.findById(rateId).map(post->{
+            request.setRates(request.getRates());
+            rateRepository.save(post);
+            return post;
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, rateId));
+
+
+
     }
 
     @Override

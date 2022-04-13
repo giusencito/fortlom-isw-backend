@@ -8,7 +8,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -18,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "persons")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,12 +36,12 @@ public class Person {
     @NotNull
     @NotBlank
     @Size(max = 30)
-    private String RealName;
+    private String realname;
 
     @NotNull
     @NotBlank
     @Size(max = 30)
-    private String LastName;
+    private String lastname;
 
     @NotNull
     @NotBlank
@@ -49,11 +52,21 @@ public class Person {
 
     @NotNull
     @NotBlank
-    @Size(max = 50)
     private String password;
 
     @Lob
     private byte[] content;
+
+    private String imageprofiletype;
+
+    private String tokenpassword;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Rol> roles=new HashSet<>();
+
 
     @OneToMany(targetEntity = Forum.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "personid",referencedColumnName = "id")

@@ -61,7 +61,7 @@ public class FanaticServiceImpl implements FanaticService {
 
         return fanaticRepository.findById(artistId).map(dueño ->
                 fanaticRepository.save(
-                        dueño.withFanaticAlias(request.getFanaticAlias())
+                        dueño.withFanaticalias(request.getFanaticalias())
 
                 )
         ).orElseThrow(() -> new ResourceNotFoundException(ENTITY, artistId));
@@ -91,8 +91,9 @@ public class FanaticServiceImpl implements FanaticService {
     }
 
     @Override
-    public Optional<Fanatic> getbyNombreUsuario(String nombreUsuario) {
-        return fanaticRepository.findByUsername(nombreUsuario);
+    public Fanatic getbyNombreUsuario(String nombreUsuario) {
+        return fanaticRepository.findByUsername(nombreUsuario)
+                .orElseThrow(() -> new ResourceNotFoundException(ENTITY, (long)1));
     }
 
     @Override

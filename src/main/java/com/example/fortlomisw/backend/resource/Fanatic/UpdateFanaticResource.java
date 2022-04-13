@@ -7,15 +7,15 @@ import lombok.Setter;
 @Getter
 public class UpdateFanaticResource {
 
-    private String UserName;
+    private String username;
 
-    private String UserRealName;
+    private String realname;
 
-    private String UserLastName;
+    private String lastname;
 
-    private String UserEmail;
+    private String email;
 
-    private String UserPassword;
+    private String password;
 
     private String FanaticAlias;
 }

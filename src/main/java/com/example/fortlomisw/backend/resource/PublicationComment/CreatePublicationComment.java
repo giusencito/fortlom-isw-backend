@@ -7,8 +7,14 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class CreatePublicationResource {
-    private String CommentDescription;
+public class CreatePublicationComment {
 
-    private Date registerdate;
+
+
+
+        private String commentdescription;
+
+        private Date registerdate;
+
+
 }

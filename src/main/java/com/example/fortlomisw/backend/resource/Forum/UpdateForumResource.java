@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateForumResource {
-    private String ForumName;
-    private String ForumDescription;
+    private String forumname;
+    private String forumdescription;
 }

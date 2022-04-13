@@ -52,17 +52,12 @@ public class ArtistServiceImpl implements ArtistService {
     public Artist update(Long artistId, Artist request) {
 
 
-        Set<ConstraintViolation<Artist>> violations = validator.validate(request);
-        if (!violations.isEmpty())
-            throw new ResourceValidationException(ENTITY, violations);
 
-        return artistRepository.findById(artistId).map(artist ->
-                artistRepository.save(
-                        artist.withArtistfollowers(request.getArtistfollowers())
-
-                )
-
-        ).orElseThrow(() -> new ResourceNotFoundException(ENTITY, artistId));
+        return artistRepository.findById(artistId).map(post->{
+            post.setArtistfollowers(request.getArtistfollowers());
+            artistRepository.save(post);
+            return  post;
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, artistId));
     }
 
     @Override
@@ -89,8 +84,38 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public Optional<Artist> getbyNombreUsuario(String nombreUsuario) {
-        return artistRepository.findByUsername(nombreUsuario);
+    public Artist getbyNombreUsuario(String nombreUsuario) {
+        return artistRepository.findByUsername(nombreUsuario)
+                .orElseThrow(() -> new ResourceNotFoundException(ENTITY, (long)1));
+    }
+
+    @Override
+    public Artist setInstagramAccount(Long artistId,Artist request) {
+
+        return artistRepository.findById(artistId).map(post->{
+               post.setInstagramLink(request.getInstagramLink());
+               artistRepository.save(post);
+               return  post;
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, artistId));
+
+    }
+
+    @Override
+    public Artist setFacebookAccount(Long artistId,Artist request) {
+        return artistRepository.findById(artistId).map(post->{
+            post.setFacebookLink(request.getFacebookLink());
+            artistRepository.save(post);
+            return  post;
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, artistId));
+    }
+
+    @Override
+    public Artist setTwitterAccount(Long artistId,Artist request) {
+        return artistRepository.findById(artistId).map(post->{
+            post.setTwitterLink(request.getTwitterLink());
+            artistRepository.save(post);
+            return  post;
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, artistId));
     }
 
     @Override

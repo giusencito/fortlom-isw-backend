@@ -19,6 +19,7 @@ import java.util.Date;
 @With
 @AllArgsConstructor
 @Table(name="comments")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Comment {
 
     @Id
@@ -28,7 +29,7 @@ public class Comment {
     @NotNull
     @NotBlank
     @Size(max = 150)
-    private String CommentDescription;
+    private String commentdescription;
 
     @Temporal(TemporalType.DATE)
     private Date registerdate;

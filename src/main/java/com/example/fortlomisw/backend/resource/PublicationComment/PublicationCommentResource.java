@@ -15,13 +15,13 @@ public class PublicationCommentResource {
 
     private Long id;
 
-    private String CommentDescription;
+    private String commentdescription;
 
     private Date registerdate;
 
-    private PersonResource user;
+    private PersonResource person;
 
-    private PublicationResource publicationResource;
+    private PublicationResource publication;
 
 
 }

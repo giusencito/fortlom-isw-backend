@@ -8,8 +8,8 @@ import java.util.Date;
 @Getter
 @Setter
 public class CreatePublicationResource {
-    private String PublicationName;
-    private String PublicationDescription;
+    private String publicationName;
+    private String publicationdescription;
     private Long likes;
     private Date date;
 }

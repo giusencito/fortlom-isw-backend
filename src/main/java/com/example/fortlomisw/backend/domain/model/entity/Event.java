@@ -27,15 +27,15 @@ public class Event {
     @NotBlank
     @Size(max = 30)
     @Column(unique = true)
-    private String EventName;
+    private String eventname;
 
     @NotNull
     @NotBlank
     @Size(max = 200)
-    private String EventDescription;
+    private String eventeescription;
 
     @NotNull
-    private Long EventLikes;
+    private Long eventlikes;
 
 
     @Temporal(TemporalType.DATE)

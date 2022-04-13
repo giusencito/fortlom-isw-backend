@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import javax.validation.Validator;
+import java.util.Date;
 import java.util.List;
 
 
@@ -51,9 +52,11 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public Publication create(Long artistId, Publication request) {
+        Date date = new Date();
         return artistRepository.findById(artistId)
                 .map(artists -> {
                     request.setArtist(artists);
+                    request.setRegisterdate(date);
                     return publicationRepository.save(request);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException(ENTITY2, artistId));
@@ -61,7 +64,18 @@ public class PublicationServiceImpl implements PublicationService {
 
     @Override
     public Publication update(Long publicationId, Publication request) {
-        return null;
+
+        return publicationRepository.findById(publicationId).map(post->{
+
+            post.setLikes(request.getLikes());
+            publicationRepository.save(post);
+            return post;
+
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, publicationId));
+
+
+
+
     }
 
     @Override

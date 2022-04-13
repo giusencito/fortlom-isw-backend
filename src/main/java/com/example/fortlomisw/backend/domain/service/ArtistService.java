@@ -19,7 +19,12 @@ public interface ArtistService {
     boolean existsByNombreUsuario(String nombreUsuario);
     boolean existsByEmail(String email);
     void save(Artist artist);
-    Optional<Artist> getbyNombreUsuario(String nombreUsuario);
+    Artist getbyNombreUsuario(String nombreUsuario);
+    Artist setInstagramAccount(Long artistId,Artist request);
+    Artist setFacebookAccount(Long artistId,Artist request);
+    Artist setTwitterAccount(Long artistId,Artist request);
     Optional<Artist>getbyNombreUsuarioOrEmail(String nombreOremail);
     Artist create(Artist artist);
+
+
 }

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import javax.validation.Validator;
 @Service
@@ -56,10 +57,12 @@ public class PublicationCommentServiceImpl implements PublicationCommentService 
     public PublicationComment create(Long userId, Long publicationId, PublicationComment request) {
         Person user = artistRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", userId));
+        Date date = new Date();
         return publicationRepository.findById(publicationId)
                 .map(publications -> {
                     request.setPublication(publications);
                     request.setPerson(user);
+                    request.setRegisterdate(date);
                     return publicationCommentRepository.save(request);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Publication", publicationId));
@@ -67,6 +70,11 @@ public class PublicationCommentServiceImpl implements PublicationCommentService 
 
     @Override
     public PublicationComment update(Long commentId, PublicationComment request) {
+
+
+
+
+
         return null;
     }
 

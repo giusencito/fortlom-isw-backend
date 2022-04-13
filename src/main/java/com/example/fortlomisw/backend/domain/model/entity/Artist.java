@@ -22,6 +22,12 @@ public class Artist extends Person{
     @NotNull
     private Long artistfollowers;
 
+    private String instagramLink;
+
+    private String facebookLink;
+
+    private String twitterLink;
+
     @OneToMany(targetEntity = Rate.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "artistid",referencedColumnName = "id")
     private List<Rate> rate;

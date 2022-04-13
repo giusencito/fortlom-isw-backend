@@ -26,8 +26,15 @@ public class Multimedia {
     @Lob
     private byte[] content;
 
+    private String type;
+
+
     @ManyToOne(targetEntity = Publication.class)
     @JoinColumn(name = "publicationid")
     private Publication publication;
+
+
+
+
 
 }

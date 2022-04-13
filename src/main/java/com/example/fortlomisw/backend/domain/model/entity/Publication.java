@@ -29,12 +29,12 @@ public class Publication {
     @NotBlank
     @Size(max = 30)
     @Column(unique=true)
-    private String PublicationName;
+    private String publicationname;
 
     @NotNull
     @NotBlank
     @Size(max = 200)
-    private String PublicationDescription;
+    private String publicationdescription;
 
 
     @NotNull
