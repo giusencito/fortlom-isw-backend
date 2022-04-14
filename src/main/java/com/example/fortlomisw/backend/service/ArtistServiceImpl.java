@@ -6,6 +6,7 @@ import com.example.fortlomisw.backend.domain.service.ArtistService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
 import com.example.fortlomisw.shared.exception.ResourceValidationException;
 import com.example.fortlomisw.shared.exception.ResourcePerzonalized;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,13 @@ public class ArtistServiceImpl implements ArtistService {
 
     private static final String ENTITY = "Artist";
 
-    private final ArtistRepository artistRepository;
+    @Autowired
+    private ArtistRepository artistRepository;
 
-    private final Validator validator;
 
-    public ArtistServiceImpl(ArtistRepository artistRepository, Validator validator) {
-        this.artistRepository = artistRepository;
-        this.validator = validator;
+
+    public ArtistServiceImpl() {
+
     }
 
 
@@ -125,9 +126,8 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public Artist create(Artist artist) {
-        Set<ConstraintViolation<Artist>> violations = validator.validate(artist);
-        if (!violations.isEmpty())
-            throw new ResourceValidationException(ENTITY, violations);
+
+
         if(artistRepository.existsByUsername(artist.getUsername()))
             throw  new ResourcePerzonalized("ya exsite este nombre de usuario");
         if (artistRepository.existsByEmail(artist.getEmail()))
