@@ -8,6 +8,7 @@ import com.example.fortlomisw.backend.domain.persistence.ForumRepository;
 import com.example.fortlomisw.backend.domain.persistence.UserRepository;
 import com.example.fortlomisw.backend.domain.service.ForumCommentService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,17 +23,17 @@ public class ForumCommentServiceImpl implements ForumCommentService {
 
     private static final String ENTITY = "ForumComment";
 
-    private final ForumCommentRepository forumcommentRepository;
-    private final UserRepository userRepository;
-    private final ForumRepository forumRepository;
+    @Autowired
+    private  ForumCommentRepository forumcommentRepository;
+    @Autowired
+    private  UserRepository userRepository;
+    @Autowired
+    private  ForumRepository forumRepository;
 
-    private final Validator validator;
 
-    public ForumCommentServiceImpl(ForumCommentRepository forumcommentRepository, UserRepository userRepository, ForumRepository forumRepository, Validator validator) {
-        this.forumcommentRepository = forumcommentRepository;
-        this.userRepository = userRepository;
-        this.forumRepository = forumRepository;
-        this.validator = validator;
+
+    public ForumCommentServiceImpl() {
+
     }
 
 
