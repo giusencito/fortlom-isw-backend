@@ -5,6 +5,7 @@ import com.example.fortlomisw.backend.domain.persistence.ForumRepository;
 import com.example.fortlomisw.backend.domain.persistence.UserRepository;
 import com.example.fortlomisw.backend.domain.service.ForumService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +23,16 @@ public class ForumServiceImpl implements ForumService {
     private static final String ENTITY = "Forum";
     private static final String ENTITY2 = "User";
 
-    private final ForumRepository forumRepository;
-    private final UserRepository userRepository;
 
-    private final Validator validator;
+    @Autowired
+    private  ForumRepository forumRepository;
+    @Autowired
+    private  UserRepository userRepository;
 
-    public ForumServiceImpl(ForumRepository forumRepository, UserRepository userRepository, Validator validator) {
-        this.forumRepository = forumRepository;
-        this.userRepository = userRepository;
-        this.validator = validator;
+
+
+    public ForumServiceImpl() {
+
     }
 
 

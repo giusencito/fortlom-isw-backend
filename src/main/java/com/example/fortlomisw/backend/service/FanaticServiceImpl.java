@@ -6,6 +6,7 @@ import com.example.fortlomisw.backend.domain.service.FanaticService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
 import com.example.fortlomisw.shared.exception.ResourcePerzonalized;
 import com.example.fortlomisw.shared.exception.ResourceValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +25,13 @@ public class FanaticServiceImpl implements FanaticService {
 
     private static final String ENTITY = "Artist";
 
-    private final FanaticRepository fanaticRepository;
+    @Autowired
+    private  FanaticRepository fanaticRepository;
 
-    private final Validator validator;
 
-    public FanaticServiceImpl(FanaticRepository fanaticRepository, Validator validator) {
-        this.fanaticRepository = fanaticRepository;
-        this.validator = validator;
+
+    public FanaticServiceImpl() {
+
     }
 
 
@@ -52,11 +53,7 @@ public class FanaticServiceImpl implements FanaticService {
 
     @Override
     public Fanatic update(Long artistId, Fanatic request) {
-        Set<ConstraintViolation<Fanatic>> violations = validator.validate(request);
 
-
-        if (!violations.isEmpty())
-            throw new ResourceValidationException(ENTITY, violations);
 
 
         return fanaticRepository.findById(artistId).map(dueño ->
@@ -103,9 +100,7 @@ public class FanaticServiceImpl implements FanaticService {
 
     @Override
     public Fanatic create(Fanatic artist) {
-        Set<ConstraintViolation<Fanatic>> violations = validator.validate(artist);
-        if (!violations.isEmpty())
-            throw new ResourceValidationException(ENTITY, violations);
+
         if(fanaticRepository.existsByUsername(artist.getUsername()))
             throw  new ResourcePerzonalized("ya exsite este nombre de usuario");
         if (fanaticRepository.existsByEmail(artist.getEmail()))

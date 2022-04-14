@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -93,6 +94,7 @@ class ArtistControllerTest {
 
     }
 
+
     @Test
     void getUserByartistname() {
         long id=1;
@@ -111,6 +113,21 @@ class ArtistControllerTest {
 
     @Test
     void createUser() {
+        long id=1;
+        Artist artist=new Artist();
+        artist.setId(id);
+        artist.setUsername("sap");
+        artist.setRealname("jose");
+        artist.setLastname("wrssa");
+        artist.setEmail("wes@gmail.com");
+        artist.setPassword("nueva");
+        artist.setArtistfollowers((long)0);
+
+        when(artistRepository.save(artist)).thenReturn(artist);
+        Artist save=artistService.create(artist);
+
+        assertThat(save).isEqualTo(artist);
+
     }
 
     @Test
@@ -132,8 +149,6 @@ class ArtistControllerTest {
         artist.setEmail("wes@gmail.com");
         artist.setPassword("nueva");
         artist.setArtistfollowers((long)0);
-
-
         when(artistRepository.findById(id)).thenReturn(Optional.of(artist));
         when(artistRepository.save(updateartist)).thenReturn(updateartist);
         Artist found=artistRepository.save(updateartist);
@@ -142,17 +157,100 @@ class ArtistControllerTest {
 
     @Test
     void updateInstagramAccount() {
+        long id=1;
+        Artist updateartist=new Artist();
+        updateartist.setId(id);
+        updateartist.setUsername("sapes");
+        updateartist.setRealname("joses");
+        updateartist.setLastname("wrssa");
+        updateartist.setEmail("wes@gmail.com");
+        updateartist.setPassword("nueva");
+        updateartist.setArtistfollowers((long)0);
+        Artist artist=new Artist();
+        artist.setId(1L);
+        artist.setUsername("sapes");
+        artist.setRealname("joses");
+        artist.setLastname("wrssa");
+        artist.setEmail("wes@gmail.com");
+        artist.setPassword("nueva");
+        artist.setInstagramLink("IntagramLink");
+        artist.setArtistfollowers((long)0);
+        when(artistRepository.findById(id)).thenReturn(Optional.of(artist));
+        when(artistRepository.save(updateartist)).thenReturn(updateartist);
+        Artist found=artistRepository.save(updateartist);
+        assertThat(found).isEqualTo(updateartist);
     }
 
     @Test
     void updateTwitterAccount() {
+        long id=1;
+        Artist updateartist=new Artist();
+        updateartist.setId(id);
+        updateartist.setUsername("sapes");
+        updateartist.setRealname("joses");
+        updateartist.setLastname("wrssa");
+        updateartist.setEmail("wes@gmail.com");
+        updateartist.setPassword("nueva");
+        updateartist.setArtistfollowers((long)0);
+        Artist artist=new Artist();
+        artist.setId(1L);
+        artist.setUsername("sapes");
+        artist.setRealname("joses");
+        artist.setLastname("wrssa");
+        artist.setEmail("wes@gmail.com");
+        artist.setPassword("nueva");
+        artist.setTwitterLink("TwitterLink");
+        artist.setArtistfollowers((long)0);
+        when(artistRepository.findById(id)).thenReturn(Optional.of(artist));
+        when(artistRepository.save(updateartist)).thenReturn(updateartist);
+        Artist found=artistRepository.save(updateartist);
+        assertThat(found).isEqualTo(updateartist);
     }
 
     @Test
     void updateFacebookAccount() {
+        long id=1;
+        Artist updateartist=new Artist();
+        updateartist.setId(id);
+        updateartist.setUsername("sapes");
+        updateartist.setRealname("joses");
+        updateartist.setLastname("wrssa");
+        updateartist.setEmail("wes@gmail.com");
+        updateartist.setPassword("nueva");
+        updateartist.setArtistfollowers((long)0);
+        Artist artist=new Artist();
+        artist.setId(1L);
+        artist.setUsername("sapes");
+        artist.setRealname("joses");
+        artist.setLastname("wrssa");
+        artist.setEmail("wes@gmail.com");
+        artist.setPassword("nueva");
+        artist.setFacebookLink("FacebookLink");
+        artist.setArtistfollowers((long)0);
+        when(artistRepository.findById(id)).thenReturn(Optional.of(artist));
+        when(artistRepository.save(updateartist)).thenReturn(updateartist);
+        Artist found=artistRepository.save(updateartist);
+        assertThat(found).isEqualTo(updateartist);
     }
 
     @Test
     void deletePost() {
+        long id=1;
+        Artist artist=new Artist();
+        artist.setId(id);
+        artist.setUsername("sap");
+        artist.setRealname("jose");
+        artist.setLastname("wrssa");
+        artist.setEmail("wes@gmail.com");
+        artist.setPassword("nueva");
+        artist.setArtistfollowers((long)0);
+        when(artistRepository.findById(id)).thenReturn(Optional.of(artist));
+
+        // ACt
+        ResponseEntity<?> result = artistService.delete(id);
+
+        // Assert
+        assertThat(result).isEqualTo(ResponseEntity.ok().build());
+
     }
 }

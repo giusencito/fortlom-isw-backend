@@ -7,6 +7,7 @@ import com.example.fortlomisw.backend.domain.persistence.FanaticRepository;
 import com.example.fortlomisw.backend.domain.persistence.FollowRepository;
 import com.example.fortlomisw.backend.domain.service.FollowService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +21,17 @@ public class FollowServiceImpl implements FollowService {
 
 
     private static final String ENTITY = "Follow";
-    private final FollowRepository followRepository;
-    private final FanaticRepository fanaticRepository;
-    private final ArtistRepository artistRepository;
-    private final Validator validator;
 
-    public FollowServiceImpl(FollowRepository followRepository, FanaticRepository fanaticRepository, ArtistRepository artistRepository, Validator validator) {
-        this.followRepository = followRepository;
-        this.fanaticRepository = fanaticRepository;
-        this.artistRepository = artistRepository;
-        this.validator = validator;
+    @Autowired
+    private  FollowRepository followRepository;
+    @Autowired
+    private  FanaticRepository fanaticRepository;
+    @Autowired
+    private  ArtistRepository artistRepository;
+
+
+    public FollowServiceImpl() {
+
     }
 
 

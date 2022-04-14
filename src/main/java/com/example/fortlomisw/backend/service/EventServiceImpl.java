@@ -6,6 +6,7 @@ import com.example.fortlomisw.backend.domain.persistence.EventRepository;
 import com.example.fortlomisw.backend.domain.persistence.FanaticRepository;
 import com.example.fortlomisw.backend.domain.service.EventService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +21,17 @@ public class EventServiceImpl implements EventService {
 
     private static final String ENTITY = "Event";
     private static final String ENTITY2 = "Artist";
-    private final EventRepository eventRepository;
-    private final ArtistRepository artistRepository;
-    private final Validator validator;
 
-    public EventServiceImpl(EventRepository eventRepository, ArtistRepository artistRepository, Validator validator) {
-        this.eventRepository = eventRepository;
-        this.artistRepository = artistRepository;
-        this.validator = validator;
+
+    @Autowired
+    private  EventRepository eventRepository;
+    @Autowired
+    private  ArtistRepository artistRepository;
+
+
+    public EventServiceImpl() {
+
+
     }
 
 
