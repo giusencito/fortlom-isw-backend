@@ -9,6 +9,7 @@ import com.example.fortlomisw.backend.domain.persistence.PublicationRepository;
 import com.example.fortlomisw.backend.domain.persistence.UserRepository;
 import com.example.fortlomisw.backend.domain.service.PublicationCommentService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,18 +23,15 @@ public class PublicationCommentServiceImpl implements PublicationCommentService 
 
 
     private static final String ENTITY = "Comment";
+    @Autowired
+    private  PublicationCommentRepository publicationCommentRepository;
+    @Autowired
+    private  UserRepository artistRepository;
+    @Autowired
+    private  PublicationRepository publicationRepository;
 
-    private final PublicationCommentRepository publicationCommentRepository;
-    private final UserRepository artistRepository;
-    private final PublicationRepository publicationRepository;
+    public PublicationCommentServiceImpl() {
 
-    private final Validator validator;
-
-    public PublicationCommentServiceImpl(PublicationCommentRepository publicationCommentRepository, UserRepository artistRepository, PublicationRepository publicationRepository, Validator validator) {
-        this.publicationCommentRepository = publicationCommentRepository;
-        this.artistRepository = artistRepository;
-        this.publicationRepository = publicationRepository;
-        this.validator = validator;
     }
 
 

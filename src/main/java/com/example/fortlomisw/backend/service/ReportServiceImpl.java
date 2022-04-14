@@ -6,6 +6,7 @@ import com.example.fortlomisw.backend.domain.persistence.ReportRepository;
 import com.example.fortlomisw.backend.domain.persistence.UserRepository;
 import com.example.fortlomisw.backend.domain.service.ReportService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +21,14 @@ public class ReportServiceImpl implements ReportService {
 
 
     private static final String ENTITY = "Report";
-    private final ReportRepository reportRepository;
-    private final UserRepository userRepository;
-    private final Validator validator;
+    @Autowired
+    private ReportRepository reportRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public ReportServiceImpl(ReportRepository reportRepository, UserRepository userRepository, Validator validator) {
-        this.reportRepository = reportRepository;
-        this.userRepository = userRepository;
-        this.validator = validator;
+
+    public ReportServiceImpl() {
+
     }
 
 

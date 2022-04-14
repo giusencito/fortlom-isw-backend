@@ -22,11 +22,11 @@ import java.util.*;
 @Service
 public class PersonServiceImpl implements PersonService {
 
+    @Autowired
+    private UserRepository userRepository;
 
-    private final UserRepository userRepository;
+    public PersonServiceImpl() {
 
-    public PersonServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
     }
 
 

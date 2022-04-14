@@ -7,6 +7,7 @@ import com.example.fortlomisw.backend.domain.persistence.FanaticRepository;
 import com.example.fortlomisw.backend.domain.persistence.RateRepository;
 import com.example.fortlomisw.backend.domain.service.RateService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +20,16 @@ public class RateServiceImpl implements RateService {
 
 
     private static final String ENTITY = "Rate";
-    private final RateRepository rateRepository;
-    private final FanaticRepository fanaticRepository;
-    private final ArtistRepository artistRepository;
-    private final Validator validator;
+    @Autowired
+    private  RateRepository rateRepository;
+    @Autowired
+    private  FanaticRepository fanaticRepository;
+    @Autowired
+    private  ArtistRepository artistRepository;
 
-    public RateServiceImpl(RateRepository rateRepository, FanaticRepository fanaticRepository, ArtistRepository artistRepository, Validator validator) {
-        this.rateRepository = rateRepository;
-        this.fanaticRepository = fanaticRepository;
-        this.artistRepository = artistRepository;
-        this.validator = validator;
+
+    public RateServiceImpl() {
+
     }
 
 

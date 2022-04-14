@@ -5,6 +5,7 @@ import com.example.fortlomisw.backend.domain.persistence.ArtistRepository;
 import com.example.fortlomisw.backend.domain.persistence.PublicationRepository;
 import com.example.fortlomisw.backend.domain.service.PublicationService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +23,14 @@ public class PublicationServiceImpl implements PublicationService {
     private static final String ENTITY = "Publication";
     private static final String ENTITY2 = "Artist";
 
-    private final PublicationRepository publicationRepository;
-    private final ArtistRepository artistRepository;
+    @Autowired
+    private  PublicationRepository publicationRepository;
+    @Autowired
+    private  ArtistRepository artistRepository;
 
-    private final Validator validator;
 
-    public PublicationServiceImpl(PublicationRepository publicationRepository, ArtistRepository artistRepository, Validator validator) {
-        this.publicationRepository = publicationRepository;
-        this.artistRepository = artistRepository;
-        this.validator = validator;
+    public PublicationServiceImpl() {
+
     }
 
 

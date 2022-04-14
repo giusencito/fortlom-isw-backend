@@ -7,6 +7,7 @@ import com.example.fortlomisw.backend.domain.persistence.MultimediaRepository;
 import com.example.fortlomisw.backend.domain.persistence.PublicationRepository;
 import com.example.fortlomisw.backend.domain.service.MultimediaService;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
@@ -30,21 +31,13 @@ public class MultimediaServiceImpl implements MultimediaService {
 
 
     private static final String ENTITY = "Multimedia";
-
-    private final MultimediaRepository multimediaRepository;
-
-    private final PublicationRepository publicationRepository;
-
-
+    @Autowired
+    private MultimediaRepository multimediaRepository;
+    @Autowired
+    private PublicationRepository publicationRepository;
 
 
-
-    private final Validator validator;
-
-    public MultimediaServiceImpl(MultimediaRepository multimediaRepository, PublicationRepository publicationRepository, Validator validator) {
-        this.multimediaRepository = multimediaRepository;
-        this.publicationRepository = publicationRepository;
-        this.validator = validator;
+    public MultimediaServiceImpl() {
 
     }
 

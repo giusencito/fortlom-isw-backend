@@ -18,6 +18,11 @@ public class RolServiceImpl implements RolService {
     RolRepository rolRepository;
 
     private static String[] DEFAULT_ROLES = {"Role_Fanatic","Role_Artist"};
+
+    public RolServiceImpl(){
+
+    }
+
     @Override
     public Optional<Rol> findByName(RolNombre name) {
         return rolRepository.findByName(name);
