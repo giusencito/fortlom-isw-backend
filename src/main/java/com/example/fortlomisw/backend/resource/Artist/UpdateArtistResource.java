@@ -7,16 +7,6 @@ import lombok.Setter;
 @Setter
 public class UpdateArtistResource {
 
-    private String UserName;
-
-    private String realname;
-
-    private String lastname;
-
-    private String email;
-
-    private String password;
-
     private Long artistfollowers;
     private String instagramLink;
 
