@@ -43,7 +43,7 @@ class FollowServiceTest {
     @TestConfiguration
     static class FollowServiceTestConfiguration {
         @Bean
-        public FollowService fanaticService() {
+        public FollowService followService() {
             return new FollowServiceImpl();
         }
     }

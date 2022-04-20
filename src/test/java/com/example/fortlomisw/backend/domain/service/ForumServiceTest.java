@@ -39,7 +39,7 @@ class ForumServiceTest {
     @TestConfiguration
     static class ForumServiceTestConfiguration {
         @Bean
-        public ForumService forumCommentService() {
+        public ForumService forumService() {
             return new ForumServiceImpl();
         }
     }

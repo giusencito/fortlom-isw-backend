@@ -83,28 +83,7 @@ class MultimediaServiceTest {
         assertThat(Multimedia).isEqualTo(multimedia);
     }
 
-    @Test
-    void update() {
-        long id = 1;
-        byte[] bytes = "hello world".getBytes();
-        Multimedia updateMultimedia = new Multimedia();
-        updateMultimedia.setId(id);
-        updateMultimedia.setContent(bytes);
-        updateMultimedia.setType("type 2");
 
-        byte[] bytes2 = "hello world 1".getBytes();
-        Multimedia oldMultimedia = new Multimedia();
-        oldMultimedia.setId(id);
-        oldMultimedia.setContent(bytes2);
-        oldMultimedia.setType("type 1");
-
-        when(multimediarepository.save(updateMultimedia)).thenReturn(updateMultimedia);
-        when(multimediarepository.findById(id)).thenReturn(Optional.of(oldMultimedia));
-        when(multimediarepository.findById(id)).thenReturn(Optional.of(updateMultimedia));
-        Multimedia multimedia = multimediaService.update(id,updateMultimedia);
-
-        assertThat(multimedia).isEqualTo(multimedia);
-    }
 
     @Test
     void getMultimediaByPublicationId() {
