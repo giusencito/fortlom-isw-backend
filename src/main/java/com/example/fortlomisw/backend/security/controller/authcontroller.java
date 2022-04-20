@@ -37,7 +37,7 @@ public class authcontroller {
 
 
     }
-    @ApiOperation(value="login",notes = "Esta consulta nos ayuda a logear a un usuario ya registrado")
+    @ApiOperation(value="login",notes = "Esta consulta nos ayuda a logear a un usuario ya registrado, en el caso de que se utilice un usuario no registrado saldria error")
     @PostMapping("/login")
     public ResponseEntity<jwtDto>login(@Valid @RequestBody LoginUser loginUser, BindingResult bindingResult){
 
