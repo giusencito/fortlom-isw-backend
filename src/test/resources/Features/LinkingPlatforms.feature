@@ -14,3 +14,4 @@ Feature: Linking of platforms
     When press the option to link with Twitter
     And put your link to your Twitter page
     Then established the link with the application
+
