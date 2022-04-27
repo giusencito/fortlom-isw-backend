@@ -15,8 +15,7 @@ Feature: Change Password
     And press "Forgot your password"
     When YOU WRONGLY WRITE YOUR DATA
     And click the “Send Mail” button
-    And the mail has not arrived
-    Then it won't change the password correctly
+    Then the mail has not arrived
   Scenario: Sign in with the newly created password
     Given that the user enters the platform
     And already has the password changed on the platform
