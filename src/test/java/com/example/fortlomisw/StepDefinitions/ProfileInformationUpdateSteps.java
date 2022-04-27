@@ -56,7 +56,8 @@ public class ProfileInformationUpdateSteps {
 
     @When("choose an image of your choice")
     public void choose_an_image_of_your_choice() throws InterruptedException{
-        driver.findElement(By.id("my-file")).sendKeys("C:\\Users\\USUARIO\\Pictures\\Saved Pictures\\wallpaper joseph joestar.png");
+        String projectPath = System.getProperty("user.dir");
+        driver.findElement(By.id("my-file")).sendKeys( projectPath + "/src/test/java/com/example/fortlomisw/images/wallpaper joseph joestar.png");
     }
 
     @When("fill in the form data correctly")
