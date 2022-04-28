@@ -67,18 +67,18 @@ public class CommentsPublicationsForumsFanaticSteps {
 
     @When("choose a forum of its preference")
     public void choose_a_forum_of_its_preference() throws InterruptedException{
-        driver.findElement(By.id("selectforum")).click();
+        driver.findElement(By.id("enterforum")).click();
     }
 
     @When("write what it wants")
     public void write_what_it_wants() throws InterruptedException {
-        driver.findElement(By.id("postinput")).sendKeys("Input Testing");
+        driver.findElement(By.id("commentpost")).sendKeys("Input Testing");
         Thread.sleep(2000);
     }
 
     @When("write what it wants in the selected forum")
     public void write_what_it_wants_in_the_selected_forum() throws InterruptedException {
-        driver.findElement(By.id("foruminput")).sendKeys("Input Testing");
+        driver.findElement(By.id("commentforum")).sendKeys("Input Testing");
         Thread.sleep(2000);
     }
 
@@ -89,7 +89,7 @@ public class CommentsPublicationsForumsFanaticSteps {
 
     @When("press the button Accept")
     public void press_the_button_Accept() {
-        driver.findElement(By.id("postcommentforum")).click();
+        driver.findElement(By.id("acceptcommentforum")).click();
     }
 
     @When("press the button Like")
