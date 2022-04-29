@@ -24,7 +24,7 @@ public class FollowArtistSteps {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
 
-        driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianza");
+        driver.findElement(By.id("exampleInputEmail1")).sendKeys("fan");
         driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);

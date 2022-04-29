@@ -11,7 +11,8 @@ Feature: Fanatic Account Customization
     And click on the Change fan Profile button
     Then will be able to see the change in your profile name
 
-  Scenario: Artist places their Tags
+  Scenario: New Password
     Given go to the Configure section
-    When click on the Add button
-    Then your art will be defined by a tag
+    When fill in the password fan data correctly
+    When click on the Update Password button
+    Then your password is change

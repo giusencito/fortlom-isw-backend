@@ -2,7 +2,7 @@ Feature: Artist Comments
   Scenario: Creation of comments in Publication
     Given that the artist is in the Posts section
     And hit the see Posts button
-    When choose a publication
+    When choose a publication of its preference
     And write what you want
     And hit the Post Comment button
     Then your comment will be created successfully
@@ -15,6 +15,6 @@ Feature: Artist Comments
   Scenario: Viewing Comments on Post
     Given that the artist is in the Posts section
     And hit the see Posts button
-    When choose a publication
+    When choose a publication of its preference
     And hit the See button
     Then you can view the comments of the publication

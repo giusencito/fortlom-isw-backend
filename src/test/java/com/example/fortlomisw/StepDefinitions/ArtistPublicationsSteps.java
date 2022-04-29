@@ -22,7 +22,7 @@ public class ArtistPublicationsSteps {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
         driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianza");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nuevo");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);
 
@@ -80,7 +80,7 @@ public class ArtistPublicationsSteps {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
         driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianza");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nuevo");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         driver.findElement(By.partialLinkText("Posts")).click();
@@ -100,8 +100,9 @@ public class ArtistPublicationsSteps {
 
     @When("select images")
     public void select_images() throws InterruptedException {
+        String projectPath = System.getProperty("user.dir");
         driver.findElement(By.id("setimage")).clear();
-        driver.findElement(By.id("setimage")).sendKeys("C:\\Users\\O.T\\Downloads\\image159.jpeg");
+        driver.findElement(By.id("setimage")).sendKeys(projectPath + "/src/test/java/com/example/fortlomisw/images/musicarock.jpg");
         Thread.sleep(3000);
     }
 

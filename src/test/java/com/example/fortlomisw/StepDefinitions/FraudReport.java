@@ -22,7 +22,7 @@ public class FraudReport {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
         driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianza");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nuevo");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         driver.findElement(By.partialLinkText("Posts")).click();
@@ -47,6 +47,7 @@ public class FraudReport {
     @Then("the report is created")
     public void the_report_is_created() throws InterruptedException{
         Thread.sleep(1000);
+        Thread.sleep(1000);
         driver.close();
         driver.quit();
     }
@@ -63,7 +64,7 @@ public class FraudReport {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
         driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianza");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nuevo");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         driver.findElement(By.partialLinkText("Forum")).click();
@@ -83,7 +84,7 @@ public class FraudReport {
 
     @When("press the button Flag Forum")
     public void press_the_button_Flag_Forum() {
-        driver.findElement(By.id("buttonFlagForum")).click();
+        driver.findElement(By.id("buttonFlagPost")).click();
     }
 
     @When("there is a forum commentary that seems incorrect to him")

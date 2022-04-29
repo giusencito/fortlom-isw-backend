@@ -23,8 +23,8 @@ public class ArtistCommentsSteps {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
 
-        driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianzalima");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nuevo");
+        driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianza");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         driver.findElement(By.partialLinkText("Posts")).click();
@@ -43,8 +43,8 @@ public class ArtistCommentsSteps {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
 
-        driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianzalima");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nuevo");
+        driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianza");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         driver.findElement(By.partialLinkText("Forum")).click();
@@ -56,7 +56,7 @@ public class ArtistCommentsSteps {
         driver.findElement(By.id("seeposts")).click();
     }
 
-    @When("choose a publication")
+    @When("choose a publication of its preference")
     public void choose_a_publication() throws InterruptedException{
         Thread.sleep(2000);
     }

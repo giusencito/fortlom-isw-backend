@@ -1,7 +1,7 @@
 Feature: Comment in publications and forums as a fanatic
   Scenario: Create comments in a publication
     Given that the fanatic is at the Publication section
-    And press the button See Posts
+    And press the blue button See Posts
     When choose a publication
     And write what it wants
     And press the button Post Comment
@@ -14,7 +14,7 @@ Feature: Comment in publications and forums as a fanatic
     Then a message will show that the comment was created successfully
   Scenario: Visualize comments in a publication
     Given that the fanatic is at the Publication section
-    And press the button See Posts
+    And press the blue button See Posts
     When choose a publication
     And press the button See
     Then the comments of the publication will be visualized

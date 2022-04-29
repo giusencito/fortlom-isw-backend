@@ -30,8 +30,8 @@ public class CreateFanForumSteps {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
 
-        driver.findElement(By.id("exampleInputEmail1")).sendKeys("eduardo");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("1234");
+        driver.findElement(By.id("exampleInputEmail1")).sendKeys("fan");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(1000);
         driver.findElement(By.partialLinkText("Fanatic forum")).click();
@@ -59,6 +59,7 @@ public class CreateFanForumSteps {
     @Then("message of \"your forum created successfully will appear\"")
     public void message_of_your_forum_created_successfully() throws InterruptedException{
         Thread.sleep(1000);
+        driver.switchTo().alert().getText().equals("se creo su foro exitosamente");
         driver.switchTo().alert().accept();
         Thread.sleep(1000);
         driver.close();

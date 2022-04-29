@@ -26,8 +26,8 @@ public class FanAccountCustomizationSteps {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
 
-        driver.findElement(By.id("exampleInputEmail1")).sendKeys("eduardo");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("1234");
+        driver.findElement(By.id("exampleInputEmail1")).sendKeys("fan");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(1000);
         driver.findElement(By.partialLinkText("Configure")).click();
@@ -36,7 +36,7 @@ public class FanAccountCustomizationSteps {
 
     @When("fan click the + button")
     public void click_on_the_plus_button(){
-        driver.findElement(By.id("addbutton")).click();
+        //driver.findElement(By.id("addbutton")).click();
     }
 
     @When("choose an image")
@@ -85,6 +85,33 @@ public class FanAccountCustomizationSteps {
         Thread.sleep(2000);
         driver.close();
         driver.quit();
+    }
+    @When("fill in the password fan data correctly")
+    public void fill_in_the_password_fan_data_correctly() {
+        driver.findElement(By.id("newpassword")).clear();
+        driver.findElement(By.id("newpasswordagain")).clear();
+
+        driver.findElement(By.id("newpassword")).sendKeys("nueva");
+        driver.findElement(By.id("newpasswordagain")).sendKeys("nueva");
+
+    }
+
+    @When("click on the Update Password button")
+    public void click_on_the_Update_Password_button() throws InterruptedException {
+        driver.findElement(By.id("updatepassword")).click();
+        Thread.sleep(2000);
+    }
+
+    @Then("your password is change")
+    public void your_password_is_change() throws InterruptedException {
+        Thread.sleep(2000);
+        driver.switchTo().alert().getText().equals("password change");
+        Thread.sleep(2000);
+        driver.switchTo().alert().accept();
+        Thread.sleep(2000);
+        driver.close();
+        driver.quit();
+
     }
 
 
