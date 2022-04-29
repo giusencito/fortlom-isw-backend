@@ -2,6 +2,7 @@ package com.example.fortlomisw.StepDefinitions;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import java.util.Random;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,9 +10,12 @@ import io.cucumber.java.en.*;
 
 public class PublicationsOfEventsSteps {
     WebDriver driver = null;
+    String[] listEvents = new String[]{"event1","event2","event3","event4","event5","event6","event7"};
+    int indice;
+    Random r = new Random();
 
     @Given("that the artist is on Event section")
-    public void that_the_artist_is_on_your_homepage() throws InterruptedException {
+    public void that_the_artist_is_on_Event_section() throws InterruptedException {
         System.out.println("Inside Step - browser is open");
         String projectPath = System.getProperty("user.dir");
         System.out.println("Project path is : "+projectPath);
@@ -22,7 +26,7 @@ public class PublicationsOfEventsSteps {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
         driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianza");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nuevo");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         driver.findElement(By.partialLinkText("Event")).click();
@@ -36,12 +40,15 @@ public class PublicationsOfEventsSteps {
 
     @When("fill in the data correctly")
     public void fill_in_the_data_correctly() throws InterruptedException{
+        indice = r.nextInt(7);
         driver.findElement(By.id("seteventname")).clear();
         driver.findElement(By.id("seteventdescription")).clear();
         driver.findElement(By.id("setdate")).clear();
-        driver.findElement(By.id("seteventname")).sendKeys("Chill & Flex - 1st Fest");
+
+        driver.findElement(By.id("seteventname")).sendKeys(listEvents[indice]);
+
         driver.findElement(By.id("seteventdescription")).sendKeys("eu facilisis magna. Nam convallis diam vitae sem fermentum, vitae suscipit nibh feugiat. Aenean Nulla facilisi. Aliquam quam urna, maximus eget tincidunt tempor, efficitur a dui.");
-        driver.findElement(By.id("setdate")).sendKeys("22/05/2022");
+        driver.findElement(By.id("setdate")).sendKeys("25/05/2022");
         Thread.sleep(2000);
     }
 
@@ -80,7 +87,7 @@ public class PublicationsOfEventsSteps {
 
     @Then("all events will be displayed")
     public void all_events_will_be_displayed() throws InterruptedException{
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         driver.close();
         driver.quit();
     }
@@ -92,7 +99,7 @@ public class PublicationsOfEventsSteps {
 
     @Then("events will not be displayed")
     public void events_will_not_be_displayed() throws InterruptedException{
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         driver.close();
         driver.quit();
     }

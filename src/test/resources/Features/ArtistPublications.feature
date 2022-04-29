@@ -9,7 +9,7 @@ Feature: Artist Publications
     Given that the artist is on your homepage
     When press the option Posts
     And do not fill out the form
-    And press the button Post
+    And press button Post
     Then an alert message will appear
   Scenario: Making a publication with images
     Given that the artist is on Posts section

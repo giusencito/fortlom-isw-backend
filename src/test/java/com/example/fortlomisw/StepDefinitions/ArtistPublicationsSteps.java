@@ -22,7 +22,7 @@ public class ArtistPublicationsSteps {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
         driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianza");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nuevo");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);
 
@@ -39,6 +39,11 @@ public class ArtistPublicationsSteps {
     }
     @When("press the button Post")
     public void press_the_button_Post() throws InterruptedException{
+        driver.findElement(By.id("buttonPost")).click();
+        Thread.sleep(2000);
+    }
+    @When("press button Post")
+    public void press_button_Post() throws InterruptedException{
         driver.findElement(By.id("buttonPost")).click();
         Thread.sleep(2000);
         driver.switchTo().alert().accept();
@@ -75,7 +80,7 @@ public class ArtistPublicationsSteps {
         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
         driver.navigate().to("http://localhost:4200/");
         driver.findElement(By.id("exampleInputEmail1")).sendKeys("alianza");
-        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nueva");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("nuevo");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         driver.findElement(By.partialLinkText("Posts")).click();
@@ -88,25 +93,28 @@ public class ArtistPublicationsSteps {
     }
 
     @When("press the clip")
-    public void press_the_clip() {
+    public void press_the_clip() throws InterruptedException {
         driver.findElement(By.id("buttonClip")).click();
+        Thread.sleep(1000);
     }
 
     @When("select images")
-    public void select_images() {
+    public void select_images() throws InterruptedException {
         driver.findElement(By.id("setimage")).clear();
         driver.findElement(By.id("setimage")).sendKeys("C:\\Users\\O.T\\Downloads\\image159.jpeg");
+        Thread.sleep(3000);
     }
 
     @When("press the button Append")
-    public void press_the_button_Append() {
+    public void press_the_button_Append() throws InterruptedException  {
         driver.findElement(By.id("buttonAppend")).click();
+        Thread.sleep(1500);
     }
 
     @Then("will be able to make a publication with images")
     public void will_be_able_to_make_a_publication_with_images() throws InterruptedException {
         driver.findElement(By.id("seeposts")).click();
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         driver.close();
         driver.quit();
     }
