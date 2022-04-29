@@ -27,9 +27,6 @@ public class LinkingPlatformsSteps {
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(2000);
         driver.findElement(By.partialLinkText("Configure")).click();
-
-
-
     }
     @When("press the option to link with Facebook")
     public void press_the_option_to_link_with_Facebook() {
