@@ -1,10 +1,14 @@
 package com.example.fortlomisw.StepDefinitions;
 
+import com.example.fortlomisw.FortlomIswApplication;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
+
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @RunWith(Cucumber.class)
+@SpringBootTest(classes = {FortlomIswApplication.class,RunnerTest.class},webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberOptions(
         features="src/test/resources",
         glue="classpath:com.example.fortlomisw.StepDefinitions",
@@ -14,5 +18,5 @@ import org.junit.runner.RunWith;
                 "html:target/HtmlReports"}
 
 )
-public class TestRunner {
+public class RunnerTest {
 }

@@ -35,7 +35,7 @@ public class SwaggerConfig implements WebMvcConfigurer{
 
     @Bean
     public Docket swaggerApiConfig(){
-        final var host = "localhost:8080";
+        final String host = "localhost:8080";
 
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
@@ -85,10 +85,10 @@ public class SwaggerConfig implements WebMvcConfigurer{
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        final var apiDocs = "/v2/api-docs";
-        final var configUi = "/swagger-resources/configuration/ui";
-        final var configSecurity = "/swagger-resources/configuration/security";
-        final var resources = "/swagger-resources";
+        final String apiDocs = "/v2/api-docs";
+        final String configUi = "/swagger-resources/configuration/ui";
+        final String configSecurity = "/swagger-resources/configuration/security";
+        final String resources = "/swagger-resources";
 
         registry.addRedirectViewController(PATH + apiDocs, apiDocs).setKeepQueryParams(true);
         registry.addRedirectViewController(PATH + resources, resources);

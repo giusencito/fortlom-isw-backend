@@ -14,7 +14,7 @@
 	<name>fortlom-isw</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -166,8 +166,21 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.10.0</version>
+			<scope>test</scope>
+		</dependency>
 
-
+		<!-- https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine -->
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
+		</dependency>
 
 
 
@@ -197,7 +210,10 @@
 					</excludes>
 				</configuration>
 			</plugin>
-		</plugins>
+
+
+
+	</plugins>
 	</build>
 
 </project>
