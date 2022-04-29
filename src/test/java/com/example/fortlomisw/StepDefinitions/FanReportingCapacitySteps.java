@@ -27,7 +27,27 @@ public class FanReportingCapacitySteps {
         driver.findElement(By.id("exampleInputPassword1")).sendKeys("1234");
         driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
         Thread.sleep(1000);
-        driver.findElement(By.partialLinkText("Publications")).click();
+        driver.findElement(By.partialLinkText("Publication")).click();
+        Thread.sleep(1000);
+    }
+
+    @Given("is in the Fanatic forum section")
+    public void the_fanatic_is_in_the_forum_section() throws InterruptedException {
+        System.out.println("Inside Step - browser is open");
+        String projectPath = System.getProperty("user.dir");
+        System.out.println("Project path is : "+projectPath);
+        System.out.println("Project path is : "+projectPath+"/src/test/resources/Drivers/chromedriver.exe ");
+        System.setProperty("webdriver.chrome.driver",projectPath+"/src/test/resources/Drivers/chromedriver.exe ");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+        driver.navigate().to("http://localhost:4200/");
+
+        driver.findElement(By.id("exampleInputEmail1")).sendKeys("eduardo");
+        driver.findElement(By.id("exampleInputPassword1")).sendKeys("1234");
+        driver.findElement(By.id("enter")).sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+        driver.findElement(By.partialLinkText("Fanatic forum")).click();
         Thread.sleep(1000);
     }
 
@@ -55,5 +75,35 @@ public class FanReportingCapacitySteps {
         driver.quit();
     }
 
+    @And("enter a forum")
+    public void enter_a_forum() {
+            driver.findElement(By.id("enterforum")).click();
 
+    }
+
+    @When("detect a profane foro")
+    public void detect_a_profane_foro(){
+        driver.findElement(By.id("forumtitle")).getText().equals("prueba");
+
+    }
+
+    @Then("the foro is reported")
+    public void theForoIsReported() throws InterruptedException {
+        Thread.sleep(1000);
+        driver.close();
+        driver.quit();
+
+    }
+
+    @When("detect a profane comment")
+    public void detectAProfaneComment() {
+        driver.findElement(By.id("commenttitle")).getText().equals("Hey");
+    }
+
+    @Then("the comment is reported")
+    public void theCommentIsReported() throws InterruptedException {
+        Thread.sleep(1000);
+        driver.close();
+        driver.quit();
+    }
 }
