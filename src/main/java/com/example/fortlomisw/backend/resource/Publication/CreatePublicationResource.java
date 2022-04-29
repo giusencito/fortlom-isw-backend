@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 public class CreatePublicationResource {
     private String publicationName;
-    private String publicationdescription;
+    private String publicationDescription;
     private Long likes;
     private Date date;
 }
