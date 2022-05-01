@@ -86,12 +86,17 @@ public class ForumServiceImpl implements ForumService {
         Forum request=new Forum();
         request.setForumname("forumtest");
         request.setForumdescription("for test");
-        createForum((long)2,request);
+
         Forum request2=new Forum();
         request2.setForumname("forumtestfan");
         request2.setForumdescription("for test");
-        createForum((long)1,request2);
 
+       if(!forumRepository.existsByForumname(request.getForumname())){
+           createForum((long)2,request);
+       }
+       if(!forumRepository.existsByForumname(request2.getForumname())){
+           createForum((long)1,request2);
+       }
 
     }
 }

@@ -97,6 +97,10 @@ public class PublicationServiceImpl implements PublicationService {
         request.setPublicationname("publictestanalisis");
         request.setPublicationdescription("for tests");
         request.setLikes((long)0);
-        create((long)2,request);
+        if(!publicationRepository.existsByPublicationname(request.getPublicationname())){
+
+            create((long)2,request);
+        }
+
     }
 }

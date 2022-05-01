@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface ForumRepository extends JpaRepository<Forum,Long> {
     List<Forum> findByPersonId(Long userId);
+    Boolean existsByForumname(String username);
 }

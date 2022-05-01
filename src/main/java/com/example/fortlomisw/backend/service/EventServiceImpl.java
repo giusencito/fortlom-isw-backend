@@ -95,6 +95,9 @@ public class EventServiceImpl implements EventService {
         request.setEventname("eventest");
         request.setEventeescription("descriptiontest");
         request.setEventlikes((long)0);
-        createEvent((long)2,request);
+        if(!eventRepository.existsByEventname(request.getEventname())){
+            createEvent((long)2,request);
+        }
+
     }
 }
