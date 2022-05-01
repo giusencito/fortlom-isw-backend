@@ -83,7 +83,7 @@ public class CreateFanForumSteps {
 
     @And("forum name is used")
     public void the_forum_name_is_used()throws InterruptedException{
-        driver.findElement(By.id("forumname")).sendKeys("forumtest");
+        driver.findElement(By.id("forumname")).sendKeys("forumtestfan");
         Thread.sleep(1000);
     }
 

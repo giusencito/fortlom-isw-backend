@@ -47,6 +47,7 @@ public class FraudReport {
     @Then("the report is created")
     public void the_report_is_created() throws InterruptedException{
         Thread.sleep(1000);
+        driver.switchTo().alert().accept();
         Thread.sleep(1000);
         driver.close();
         driver.quit();

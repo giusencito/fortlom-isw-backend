@@ -88,4 +88,13 @@ public class EventServiceImpl implements EventService {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, eventId));
     }
+
+    @Override
+    public void seed() {
+        Event request=new Event();
+        request.setEventname("eventest");
+        request.setEventeescription("descriptiontest");
+        request.setEventlikes((long)0);
+        createEvent((long)2,request);
+    }
 }

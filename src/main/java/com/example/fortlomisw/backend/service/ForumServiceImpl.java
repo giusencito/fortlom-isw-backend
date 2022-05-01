@@ -80,4 +80,18 @@ public class ForumServiceImpl implements ForumService {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, forumId));
     }
+
+    @Override
+    public void seed() {
+        Forum request=new Forum();
+        request.setForumname("forumtest");
+        request.setForumdescription("for test");
+        createForum((long)2,request);
+        Forum request2=new Forum();
+        request2.setForumname("forumtestfan");
+        request2.setForumdescription("for test");
+        createForum((long)1,request2);
+
+
+    }
 }

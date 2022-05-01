@@ -90,4 +90,13 @@ public class PublicationServiceImpl implements PublicationService {
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, publicationId));
     }
+
+    @Override
+    public void seed() {
+        Publication request=new Publication();
+        request.setPublicationname("publictestanalisis");
+        request.setPublicationdescription("for tests");
+        request.setLikes((long)0);
+        create((long)2,request);
+    }
 }

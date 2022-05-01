@@ -15,6 +15,6 @@ public interface PublicationService {
 
     List<Publication> getPublicationByArtistId(Long artistId);
     ResponseEntity<?> delete(Long publicationId);
-
+   void seed();
 
 }

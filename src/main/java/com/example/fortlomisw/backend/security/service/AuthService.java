@@ -47,6 +47,64 @@ public class AuthService {
     @Autowired
     RolService rolService;
 
+    public void seed(){
+        Fanatic fanatic= new Fanatic();
+        fanatic.setUsername("fan");
+        fanatic.setRealname("jose");
+        fanatic.setLastname("Peña");
+        fanatic.setEmail("emailtest@gmail.com");
+        fanatic.setFanaticalias("elfanatico");
+        fanatic.setPassword(passwordEncoder.encode("nueva"));
+        Set<Rol> roles = new HashSet<>();
+        roles.add(rolService.findByName(RolNombre.Role_Fanatic).get());
+        fanatic.setRoles(roles);
+        if(!fanaticService.existsByNombreUsuario(fanatic.getUsername())){
+            fanaticService.save(fanatic);
+        }
+        Artist artist= new Artist();
+        artist.setUsername("alianza");
+        artist.setRealname("nametest");
+        artist.setLastname("lastnametest");
+        artist.setEmail("alianza@gmail.com");
+        artist.setArtistfollowers((long)0 );
+        artist.setPassword(passwordEncoder.encode("nueva"));
+        Set<Rol> roles2 = new HashSet<>();
+        roles2.add(rolService.findByName(RolNombre.Role_Artist).get());
+        artist.setRoles(roles2);
+        if(!artistService.existsByNombreUsuario(artist.getUsername())){
+            artistService.save(artist);
+        }
+        Artist artist2= new Artist();
+        artist2.setUsername("selenium");
+        artist2.setRealname("selenium");
+        artist2.setLastname("Tests");
+        artist2.setEmail("pruebaseleniumfortlom@gmail.com");
+        artist2.setArtistfollowers((long)0 );
+        artist2.setPassword(passwordEncoder.encode("nueva"));
+        Set<Rol> roles3 = new HashSet<>();
+        roles3.add(rolService.findByName(RolNombre.Role_Artist).get());
+        artist2.setRoles(roles3);
+        if(!artistService.existsByNombreUsuario(artist2.getUsername())){
+            artistService.save(artist2);
+        }
+        Fanatic fanatic2= new Fanatic();
+        fanatic2.setUsername("tole");
+        fanatic2.setRealname("marco");
+        fanatic2.setLastname("Peñas");
+        fanatic2.setEmail("emailtestesfan@gmail.com");
+        fanatic2.setFanaticalias("elfanaticos");
+        fanatic2.setPassword(passwordEncoder.encode("nueva"));
+        Set<Rol> roles4 = new HashSet<>();
+        roles4.add(rolService.findByName(RolNombre.Role_Fanatic).get());
+        fanatic2.setRoles(roles);
+        if(!fanaticService.existsByNombreUsuario(fanatic2.getUsername())){
+            fanaticService.save(fanatic2);
+        }
+    }
+
+
+
+
 
     public ResponseEntity<?> registerfanatic(NewFanatic request, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
