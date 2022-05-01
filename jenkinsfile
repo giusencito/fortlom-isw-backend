@@ -13,22 +13,6 @@ pipeline{
                         }
                     }
                 }
-
-                stage('Testing Stage'){
-                    steps{
-                        withMaven(maven: 'MAVEN_3_8_5'){
-                            bat 'mvn test'
-                        }
-                    }
-                }
-
-                stage('Package Stage'){
-                    steps{
-                        withMaven(maven: 'MAVEN_3_8_5'){
-                            bat 'mvn package'
-                        }
-                    }
-                }
         }
 
 }
