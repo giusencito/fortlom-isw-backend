@@ -4,6 +4,8 @@ package com.example.fortlomisw.backend.api;
 import com.example.fortlomisw.backend.domain.model.entity.Forum;
 import com.example.fortlomisw.backend.domain.service.ForumService;
 import com.example.fortlomisw.backend.mapping.ForumMapper;
+import com.example.fortlomisw.backend.resource.Artist.ArtistResource;
+import com.example.fortlomisw.backend.resource.Artist.UpdateArtistResource;
 import com.example.fortlomisw.backend.resource.Forum.CreateForumResource;
 import com.example.fortlomisw.backend.resource.Forum.ForumResource;
 import com.example.fortlomisw.backend.resource.Forum.UpdateForumResource;
@@ -60,8 +62,11 @@ public class ForumController {
         return forumService.deleteForum(forumId);
     }
 
-
-
+    @ApiOperation(value = "Set ConductRules",notes = "Se define las reglas de conducta")
+    @PutMapping("/conductrules/{forumId}")
+    public ForumResource createconductrules(@PathVariable Long forumId, @RequestBody UpdateForumResource request) {
+        return mapper.toResource(forumService.updateForum(forumId, mapper.toModel(request)));
+    }
 
 
 

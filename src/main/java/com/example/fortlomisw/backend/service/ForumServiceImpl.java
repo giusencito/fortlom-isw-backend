@@ -65,7 +65,13 @@ public class ForumServiceImpl implements ForumService {
 
     @Override
     public Forum updateForum(Long forumId, Forum request) {
-        return null;
+        return forumRepository.findById(forumId).map(post->{
+
+            post.setConductrules(request.getConductrules());
+            forumRepository.save(post);
+            return post;
+
+        }).orElseThrow(() -> new ResourceNotFoundException(ENTITY, forumId));
     }
 
     @Override

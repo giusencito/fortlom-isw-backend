@@ -38,6 +38,9 @@ public class Forum {
     private String forumdescription;
 
 
+    @Size(max = 1000)
+    private String conductrules;
+
     @ManyToOne(targetEntity = Person.class)
     @JoinColumn(name = "personid")
     private Person person;
