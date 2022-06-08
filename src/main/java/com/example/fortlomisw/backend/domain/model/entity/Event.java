@@ -46,6 +46,6 @@ public class Event {
     @JoinColumn(name = "artistid")
     private Artist artist;
 
-
+    private String ticketLink;
 
 }

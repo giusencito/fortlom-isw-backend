@@ -13,6 +13,7 @@ public class CreateEventResource {
     private String eventeescription;
     private Long eventlikes;
     private Date registerdate;
+    private String ticketLink;
 
 
 }

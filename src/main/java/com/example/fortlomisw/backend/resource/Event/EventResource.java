@@ -15,4 +15,5 @@ public class EventResource {
     private Long eventlikes;
     private Date registerdate;
     private ArtistResource artist;
+    private String ticketLink;
 }
