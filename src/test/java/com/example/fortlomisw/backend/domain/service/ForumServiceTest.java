@@ -1,8 +1,6 @@
 package com.example.fortlomisw.backend.domain.service;
 
-import com.example.fortlomisw.backend.domain.model.entity.Forum;
-import com.example.fortlomisw.backend.domain.model.entity.ForumComment;
-import com.example.fortlomisw.backend.domain.model.entity.Person;
+import com.example.fortlomisw.backend.domain.model.entity.*;
 import com.example.fortlomisw.backend.domain.persistence.ForumRepository;
 import com.example.fortlomisw.backend.domain.persistence.UserRepository;
 import com.example.fortlomisw.backend.service.ForumCommentServiceImpl;
@@ -114,6 +112,41 @@ class ForumServiceTest {
 
         assertThat(save).isEqualTo(forum);
     }
+
+
+    @Test
+    void ForumwithConductRules(){
+        long id=1;
+        Artist artist=new Artist();
+        artist.setId(id);
+        artist.setUsername("sap");
+        artist.setRealname("jose");
+        artist.setLastname("wrssa");
+        artist.setEmail("wes@gmail.com");
+        artist.setPassword("nueva");
+        artist.setArtistfollowers((long)0);
+        Forum forum=new Forum();
+        forum.setId(id);
+        forum.setForumname("nuevo foro");
+        forum.setForumdescription("descripcion");
+        forum.setPerson(artist);
+        Forum updateforum=new Forum();
+        updateforum.setId(id);
+        updateforum.setForumname("description");
+        updateforum.setForumdescription("jose");
+        updateforum.setConductrules("nuevas reglas");
+        updateforum.setPerson(artist);
+
+        when(forumRepository.findById(id)).thenReturn(Optional.of(forum));
+        when(forumRepository.save(updateforum)).thenReturn(updateforum);
+        Forum found=forumRepository.save(updateforum);
+        assertThat(found).isEqualTo(updateforum);
+
+    }
+
+
+
+
 
     @Test
     void getForumsByUserId() {

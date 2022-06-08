@@ -129,6 +129,41 @@ class EventServiceTest {
         assertThat(save).isEqualTo(event);
     }
 
+
+    @Test
+    void createEventwithttikcetlink() {
+
+        long id=1;
+        Artist artist=new Artist();
+        artist.setId(id);
+        artist.setUsername("sap");
+        artist.setRealname("jose");
+        artist.setLastname("wrssa");
+        artist.setEmail("wes@gmail.com");
+        artist.setPassword("nueva");
+        artist.setArtistfollowers((long)0);
+        Event event=new Event();
+        event.setId(id);
+        event.setEventname("sap");
+        event.setEventeescription("jose");
+        event.setEventlikes((long)0);
+        event.setArtist(artist);
+        event.setTicketLink("ticketlink");
+
+
+        when(artistRepository.findById(id)).thenReturn(Optional.of(artist));
+        when(eventRepository.save(event)).thenReturn(event);
+        Event save=eventService.createEvent(id,event);
+
+        assertThat(save).isEqualTo(event);
+    }
+
+
+
+
+    
+
+
     @Test
     void updateEvent() {
 
