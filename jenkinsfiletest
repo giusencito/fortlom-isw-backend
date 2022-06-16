@@ -8,21 +8,21 @@ pipeline{
         stages{
                 stage('Compile Stage'){
                     steps{
-                        withMaven(maven: 'MAVEN_3_8_5'){
+                        withMaven(maven: 'MAVEN_3_8_6'){
                             bat 'mvn clean compile'
                         }
                     }
                 }
                 stage('Testing Stage'){
                     steps{
-                        withMaven(maven: 'MAVEN_3_8_5'){
+                        withMaven(maven: 'MAVEN_3_8_6'){
                             bat 'mvn test'
                         }
                     }
                 }
                 stage('Package Stage'){
                     steps{
-                        withMaven(maven: 'MAVEN_3_8_5'){
+                        withMaven(maven: 'MAVEN_3_8_6'){
                             bat 'mvn package'
                         }
                     }
