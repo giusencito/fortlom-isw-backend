@@ -4,6 +4,7 @@ import com.example.fortlomisw.backend.security.Dto.NewArtist;
 import com.example.fortlomisw.backend.security.Dto.NewFanatic;
 import com.example.fortlomisw.backend.security.jwt.jwtDto;
 import com.example.fortlomisw.backend.security.service.AuthService;
+import com.example.fortlomisw.shared.exception.Message;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class authcontroller {
 
     @ApiOperation(value="registerfanatic",notes = "Esta consulta nos ayuda a registrar a un fanatico")
     @PostMapping("/fanatic")
-    public ResponseEntity<?> registerfanatic(@Valid @RequestBody NewFanatic request, BindingResult bindingResult) {
+    public ResponseEntity<?> registerfanatic(@Valid @RequestBody NewFanatic request, BindingResult bindingResult) throws Message {
 
         return  authService.registerfanatic(request,bindingResult);
 
@@ -31,7 +32,7 @@ public class authcontroller {
     }
     @ApiOperation(value="registerartist",notes = "Esta consulta nos ayuda a registrar a un artista")
     @PostMapping("/artist")
-    public ResponseEntity<?> registerartist(@Valid @RequestBody NewArtist request, BindingResult bindingResult) {
+    public ResponseEntity<?> registerartist(@Valid @RequestBody NewArtist request, BindingResult bindingResult) throws Message {
 
         return  authService.registerartist(request,bindingResult);
 

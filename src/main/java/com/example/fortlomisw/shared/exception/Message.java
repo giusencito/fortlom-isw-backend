@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 
 
-public class Message {
+public class Message extends Throwable {
     private  String message;
 
     public Message(String message) {

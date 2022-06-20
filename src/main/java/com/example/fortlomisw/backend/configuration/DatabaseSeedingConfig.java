@@ -6,6 +6,7 @@ import com.example.fortlomisw.backend.domain.service.ForumService;
 import com.example.fortlomisw.backend.domain.service.PublicationService;
 import com.example.fortlomisw.backend.domain.service.RolService;
 import com.example.fortlomisw.backend.security.service.AuthService;
+import com.example.fortlomisw.shared.exception.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class DatabaseSeedingConfig {
     EventService eventService;
 
     @EventListener
-    public void onApplicationReady(ApplicationReadyEvent event){
+    public void onApplicationReady(ApplicationReadyEvent event) throws Message {
         String name = event.getApplicationContext().getId();
         logger.info("Starting Database Seeding Process for {} at {}", name, new Timestamp(System.currentTimeMillis()));
         rolService.seed();

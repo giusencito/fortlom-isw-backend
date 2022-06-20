@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -47,7 +48,28 @@ public class AuthService {
     @Autowired
     RolService rolService;
 
-    public void seed(){
+
+    public Rol getrolefanatic() throws Message {
+
+        Optional<Rol>value=rolService.findByName(RolNombre.Role_Fanatic);
+        if(value.isPresent()){
+             return value.get();
+        }
+        throw new Message("Error");
+    }
+
+    public Rol getroleartist() throws Message {
+
+        Optional<Rol>value=rolService.findByName(RolNombre.Role_Artist);
+        if(value.isPresent()){
+            return value.get();
+        }
+        throw new Message("Error");
+    }
+
+
+
+    public void seed() throws Message {
         Fanatic fanatic= new Fanatic();
         fanatic.setUsername("fan");
         fanatic.setRealname("jose");
@@ -56,7 +78,7 @@ public class AuthService {
         fanatic.setFanaticalias("elfanatico");
         fanatic.setPassword(passwordEncoder.encode("nueva"));
         Set<Rol> roles = new HashSet<>();
-        roles.add(rolService.findByName(RolNombre.Role_Fanatic).get());
+        roles.add(getrolefanatic());
         fanatic.setRoles(roles);
         if(!fanaticService.existsByNombreUsuario(fanatic.getUsername())){
             fanaticService.save(fanatic);
@@ -69,7 +91,7 @@ public class AuthService {
         artist.setArtistfollowers((long)0 );
         artist.setPassword(passwordEncoder.encode("nueva"));
         Set<Rol> roles2 = new HashSet<>();
-        roles2.add(rolService.findByName(RolNombre.Role_Artist).get());
+        roles2.add(getroleartist());
         artist.setRoles(roles2);
         if(!artistService.existsByNombreUsuario(artist.getUsername())){
             artistService.save(artist);
@@ -82,7 +104,7 @@ public class AuthService {
         artist2.setArtistfollowers((long)0 );
         artist2.setPassword(passwordEncoder.encode("nueva"));
         Set<Rol> roles3 = new HashSet<>();
-        roles3.add(rolService.findByName(RolNombre.Role_Artist).get());
+        roles3.add(getroleartist());
         artist2.setRoles(roles3);
         if(!artistService.existsByNombreUsuario(artist2.getUsername())){
             artistService.save(artist2);
@@ -95,7 +117,7 @@ public class AuthService {
         fanatic2.setFanaticalias("elfanaticos");
         fanatic2.setPassword(passwordEncoder.encode("nueva"));
         Set<Rol> roles4 = new HashSet<>();
-        roles4.add(rolService.findByName(RolNombre.Role_Fanatic).get());
+        roles4.add(getrolefanatic());
         fanatic2.setRoles(roles);
         if(!fanaticService.existsByNombreUsuario(fanatic2.getUsername())){
             fanaticService.save(fanatic2);
@@ -106,7 +128,7 @@ public class AuthService {
 
 
 
-    public ResponseEntity<?> registerfanatic(NewFanatic request, BindingResult bindingResult){
+    public ResponseEntity<?> registerfanatic(NewFanatic request, BindingResult bindingResult) throws Message {
         if (bindingResult.hasErrors()){
 
 
@@ -127,7 +149,7 @@ public class AuthService {
         fanatic.setFanaticalias(request.getFanaticalias());
         fanatic.setPassword(passwordEncoder.encode(request.getPassword()));
         Set<Rol> roles = new HashSet<>();
-        roles.add(rolService.findByName(RolNombre.Role_Fanatic).get());
+        roles.add(getrolefanatic());
         fanatic.setRoles(roles);
         fanaticService.save(fanatic);
         return new ResponseEntity(new Message("new fanatic saved"),HttpStatus.CREATED);
@@ -136,7 +158,7 @@ public class AuthService {
 
 
 
-    public ResponseEntity<?> registerartist(NewArtist request, BindingResult bindingResult){
+    public ResponseEntity<?> registerartist(NewArtist request, BindingResult bindingResult) throws Message {
         if (bindingResult.hasErrors()){
 
 
@@ -157,7 +179,7 @@ public class AuthService {
         artist.setArtistfollowers((long)0 );
         artist.setPassword(passwordEncoder.encode(request.getPassword()));
         Set<Rol> roles = new HashSet<>();
-        roles.add(rolService.findByName(RolNombre.Role_Artist).get());
+        roles.add(getroleartist());
         artist.setRoles(roles);
         artistService.save(artist);
         return new ResponseEntity(new Message("new artist saved"),HttpStatus.CREATED);
