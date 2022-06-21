@@ -1,7 +1,6 @@
 package com.example.fortlomisw.backend.domain.service;
 
 import com.example.fortlomisw.backend.Image.ImageModel;
-import com.example.fortlomisw.backend.domain.model.entity.Artist;
 import com.example.fortlomisw.backend.domain.model.entity.Person;
 import com.example.fortlomisw.shared.exception.Message;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ public interface PersonService {
 
     Person getById(Long artistId);
 
-   void updatephoto(Long artistId, MultipartFile file) throws IOException;
+   ResponseEntity<Object> updatephoto(Long artistId, MultipartFile file) throws IOException;
 
    ResponseEntity<byte[]> getprofileimage(Long userID) throws Message;
 

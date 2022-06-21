@@ -16,7 +16,7 @@ public interface MultimediaService {
     Multimedia getById(Long multimediaId);
     ImageModel getImageDetails(Long MultimediaID) throws Message;
     ResponseEntity<byte[]> getImage(Long MultimediaID) throws Message;
-    void create(Long multimediaId, MultipartFile file) throws IOException;
+    ResponseEntity<Object> create(Long multimediaId, MultipartFile file) throws IOException;
     ResponseEntity<ByteArrayResource>download(Long filenameId);
     Multimedia update(Long multimediaId, Multimedia request);
     List<ImageModel> getMultimediaByPublicationId(Long multimediaId);

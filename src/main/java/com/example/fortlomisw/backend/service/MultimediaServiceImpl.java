@@ -3,13 +3,16 @@ package com.example.fortlomisw.backend.service;
 import com.example.fortlomisw.backend.Image.ImageModel;
 import com.example.fortlomisw.backend.Image.ImageUtility;
 import com.example.fortlomisw.backend.domain.model.entity.Multimedia;
+import com.example.fortlomisw.backend.domain.model.entity.Publication;
 import com.example.fortlomisw.backend.domain.persistence.MultimediaRepository;
 import com.example.fortlomisw.backend.domain.persistence.PublicationRepository;
 import com.example.fortlomisw.backend.domain.service.MultimediaService;
+import com.example.fortlomisw.backend.security.service.EmailService;
 import com.example.fortlomisw.shared.exception.Message;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Validator;
 import java.io.IOException;
 import java.util.*;
 
@@ -28,7 +30,7 @@ public class MultimediaServiceImpl implements MultimediaService {
 
 
 
-
+    private static final Logger logger = LoggerFactory.getLogger(MultimediaServiceImpl.class);
 
 
     private static final String ENTITY = "Multimedia";
@@ -88,26 +90,28 @@ public class MultimediaServiceImpl implements MultimediaService {
     }
 
     @Override
-    public void create(Long publicationId, MultipartFile file)  {
+    public ResponseEntity<Object> create(Long publicationId, MultipartFile file)  {
 
 
-         publicationRepository.findById(publicationId)
-                .map(publications -> {
-                    Multimedia request = new Multimedia();
-                    request.setType(file.getContentType());
+        Optional<Publication>value=publicationRepository.findById(publicationId);
+        if (value.isPresent()){
+            Multimedia request = new Multimedia();
+            request.setType(file.getContentType());
 
-                    try {
-                        request.setContent(ImageUtility.compressImage(file.getBytes()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    request.setPublication(publications);
-                     multimediaRepository.save(request);
-                    return ResponseEntity.ok().build();
-                })
-                 .orElseThrow(() -> new ResourceNotFoundException("Publication", publicationId));
+            try {
+                request.setContent(ImageUtility.compressImage(file.getBytes()));
+            } catch (IOException e) {
+                logger.info("context", e);
+            }
+            request.setPublication(value.get());
+            multimediaRepository.save(request);
+            return ResponseEntity.ok().build();
+        }
 
 
+
+
+        return null;
     }
 
     @Override

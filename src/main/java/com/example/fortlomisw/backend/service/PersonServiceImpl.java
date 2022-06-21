@@ -2,7 +2,6 @@ package com.example.fortlomisw.backend.service;
 
 import com.example.fortlomisw.backend.Image.ImageModel;
 import com.example.fortlomisw.backend.Image.ImageUtility;
-import com.example.fortlomisw.backend.configuration.DatabaseSeedingConfig;
 import com.example.fortlomisw.backend.domain.model.entity.Person;
 import com.example.fortlomisw.backend.domain.persistence.UserRepository;
 import com.example.fortlomisw.backend.domain.service.PersonService;
@@ -18,8 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import java.io.IOException;
 import java.util.*;
 
@@ -56,20 +53,26 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void updatephoto(Long artistId, MultipartFile file) {
-         userRepository.findById(artistId).map(post->{
+    public ResponseEntity<Object> updatephoto(Long artistId, MultipartFile file) {
+
+
+
+        Optional<Person>value=userRepository.findById(artistId);
+        if (value.isPresent()){
+
             try {
-                post.setContent(ImageUtility.compressImage(file.getBytes()));
-                post.setImageprofiletype(file.getContentType());
-                userRepository.save(post);
+                value.get().setContent(ImageUtility.compressImage(file.getBytes()));
+                value.get().setImageprofiletype(file.getContentType());
+                userRepository.save(value.get());
                 return ResponseEntity.ok().build();
             } catch (IOException e) {
                 logger.info("context", e);
                 return null;
             }
 
+        }
 
-         }).orElseThrow(() -> new ResourceNotFoundException("User", artistId));
+        return null;
     }
 
     @Override
