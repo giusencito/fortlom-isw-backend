@@ -162,9 +162,8 @@ class PublicationCommentServiceTest {
 
         when(pcommentrepository.findById(id)).thenReturn(Optional.of(pcomment));
         when(pcommentrepository.save(pcommentnew)).thenReturn(pcommentnew);
-        when(pcommentrepository.findById(id)).thenReturn(Optional.of(pcommentnew));
-        PublicationComment pcomment1 = pcommentservice.update(id,pcommentnew);
-        assertThat(pcomment1).isEqualTo(pcomment1);
+        PublicationComment pcomment1 = pcommentrepository.save(pcommentnew);
+        assertThat(pcomment1).isEqualTo(pcommentnew);
     }
 
     @Test
@@ -194,10 +193,11 @@ class PublicationCommentServiceTest {
         List<PublicationComment> pcommentlist = new ArrayList<>();
         pcommentlist.add(pcomment);
 
-        when(pcommentrepository.findById(id)).thenReturn(Optional.of(pcomment));
+
         when(publicationrepository.findById(id)).thenReturn(Optional.of(publication));
+        when(pcommentrepository.findByPublicationId(id)).thenReturn(pcommentlist);
         List<PublicationComment> pcomments = pcommentservice.getCommentByPublicationId(id);
-        assertThat(pcomments).isEqualTo(pcomments);
+        assertThat(pcomments).isEqualTo(pcommentlist);
     }
 
     @Test

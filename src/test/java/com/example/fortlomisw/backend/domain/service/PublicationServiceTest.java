@@ -193,10 +193,11 @@ class PublicationServiceTest {
         List<Publication> testlist = new ArrayList<>();
         testlist.add(publication);
 
-        when(publicationrepository.findById(id)).thenReturn(Optional.of(publication));
         when(artistrepository.findById(id)).thenReturn(Optional.of(artist));
+        when(publicationrepository.findByArtistId(id)).thenReturn(testlist);
+
         List<Publication> publicationslist = publicationservice.getPublicationByArtistId(id);
-        assertThat(publicationslist).isEqualTo(publicationslist);
+        assertThat(publicationslist).isEqualTo(testlist);
     }
 
     @Test

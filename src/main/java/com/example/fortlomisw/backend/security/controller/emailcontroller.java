@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/email-password")
-@CrossOrigin
+@CrossOrigin("http://localhost:4200")
 public class emailcontroller {
 
     @Autowired

@@ -1,6 +1,7 @@
 package com.example.fortlomisw.backend.domain.service;
 import com.example.fortlomisw.backend.Image.ImageModel;
 import com.example.fortlomisw.backend.domain.model.entity.Multimedia;
+import com.example.fortlomisw.shared.exception.Message;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,8 +14,8 @@ public interface MultimediaService {
     List<Multimedia> getAll();
     Page<Multimedia> getAll(Pageable pageable);
     Multimedia getById(Long multimediaId);
-    ImageModel getImageDetails(Long MultimediaID);
-    ResponseEntity<byte[]> getImage(Long MultimediaID);
+    ImageModel getImageDetails(Long MultimediaID) throws Message;
+    ResponseEntity<byte[]> getImage(Long MultimediaID) throws Message;
     void create(Long multimediaId, MultipartFile file) throws IOException;
     ResponseEntity<ByteArrayResource>download(Long filenameId);
     Multimedia update(Long multimediaId, Multimedia request);

@@ -6,6 +6,7 @@ import com.example.fortlomisw.backend.domain.model.entity.Multimedia;
 import com.example.fortlomisw.backend.domain.persistence.MultimediaRepository;
 import com.example.fortlomisw.backend.domain.persistence.PublicationRepository;
 import com.example.fortlomisw.backend.domain.service.MultimediaService;
+import com.example.fortlomisw.shared.exception.Message;
 import com.example.fortlomisw.shared.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -61,32 +62,45 @@ public class MultimediaServiceImpl implements MultimediaService {
     }
 
     @Override
-    public ImageModel getImageDetails(Long MultimediaID) {
+    public ImageModel getImageDetails(Long MultimediaID) throws Message {
         Optional<Multimedia>dbImage=multimediaRepository.findById(MultimediaID);
-        ImageModel imageModel= new ImageModel(dbImage.get().getId(),dbImage.get().getType(),ImageUtility.decompressImage(dbImage.get().getContent()));
-        return imageModel;
+        if(dbImage.isPresent()){
+            ImageModel imageModel= new ImageModel(dbImage.get().getId(),dbImage.get().getType(),ImageUtility.decompressImage(dbImage.get().getContent()));
+            return imageModel;
+
+        }
+        throw new Message("Error");
     }
 
     @Override
-    public ResponseEntity<byte[]> getImage(Long MultimediaID) {
+    public ResponseEntity<byte[]> getImage(Long MultimediaID) throws Message {
         Optional<Multimedia>dbImage=multimediaRepository.findById(MultimediaID);
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.valueOf(dbImage.get().getType()))
-                .body(ImageUtility.decompressImage(dbImage.get().getContent()));
+        if(dbImage.isPresent()){
+
+            return ResponseEntity
+                    .ok()
+                    .contentType(MediaType.valueOf(dbImage.get().getType()))
+                    .body(ImageUtility.decompressImage(dbImage.get().getContent()));
+        }
+        throw new Message("Error");
 
 
     }
 
     @Override
-    public void create(Long publicationId, MultipartFile file) throws IOException {
-        Multimedia request = new Multimedia();
-        request.setType(file.getContentType());
+    public void create(Long publicationId, MultipartFile file)  {
 
-        request.setContent(ImageUtility.compressImage(file.getBytes()));
 
          publicationRepository.findById(publicationId)
                 .map(publications -> {
+                    Multimedia request = new Multimedia();
+                    request.setType(file.getContentType());
+
+                    try {
+                        request.setContent(ImageUtility.compressImage(file.getBytes()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     request.setPublication(publications);
                      multimediaRepository.save(request);
                     return ResponseEntity.ok().build();

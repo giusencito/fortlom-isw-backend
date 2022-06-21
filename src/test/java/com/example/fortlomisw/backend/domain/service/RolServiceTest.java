@@ -49,9 +49,9 @@ class RolServiceTest {
         Rol rol =new Rol();
         rol.setId(id);
         rol.setName(role);
-        when(rolrepository.findById(id)).thenReturn(Optional.of(rol));
-        Optional<Rol> rol1 = rolservice.findByName(rol.getName());
-        assertThat(rol1).isEqualTo(rol1);
+        when(rolrepository.findByName(role)).thenReturn(Optional.of(rol));
+        Optional<Rol> rol1 = rolservice.findByName(role);
+        assertThat(rol1.get()).isEqualTo(rol);
     }
 
     @Test

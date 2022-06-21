@@ -3,6 +3,7 @@ package com.example.fortlomisw.backend.domain.service;
 import com.example.fortlomisw.backend.Image.ImageModel;
 import com.example.fortlomisw.backend.domain.model.entity.Artist;
 import com.example.fortlomisw.backend.domain.model.entity.Person;
+import com.example.fortlomisw.shared.exception.Message;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,9 +22,9 @@ public interface PersonService {
 
    void updatephoto(Long artistId, MultipartFile file) throws IOException;
 
-   ResponseEntity<byte[]> getprofileimage(Long userID);
+   ResponseEntity<byte[]> getprofileimage(Long userID) throws Message;
 
-    ImageModel getImageDetails(Long MultimediaID);
+    ImageModel getImageDetails(Long MultimediaID) throws Message;
 
     Person updateprofile(Long userId, Person request);
 

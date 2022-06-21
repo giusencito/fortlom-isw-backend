@@ -1,6 +1,7 @@
 package com.example.fortlomisw.backend.domain.service;
 
 import com.example.fortlomisw.backend.Image.ImageModel;
+import com.example.fortlomisw.backend.Image.ImageUtility;
 import com.example.fortlomisw.backend.domain.model.entity.Multimedia;
 import com.example.fortlomisw.backend.domain.model.entity.Publication;
 import com.example.fortlomisw.backend.domain.model.entity.PublicationComment;
@@ -85,29 +86,7 @@ class MultimediaServiceTest {
 
 
 
-    @Test
-    void getMultimediaByPublicationId() {
-        long id=1;
-        byte[] bytes = "hello world".getBytes();
-        Multimedia multimedia =new Multimedia();
-        multimedia.setId(id);
-        multimedia.setContent(bytes);
-        multimedia.setType("type 1");
 
-        List<Multimedia> multimedias = new ArrayList<>();
-        multimedias.add(multimedia);
-
-        long Pid=1;
-        Publication publication = new Publication();
-        publication.setId(Pid);
-
-
-
-        when(publicationrepository.findById(Pid)).thenReturn(Optional.of(publication));
-        when(multimediarepository.findById(id)).thenReturn(Optional.of(multimedia));
-        List<ImageModel> Multimedia = multimediaService.getMultimediaByPublicationId(id);
-        assertThat(Multimedia).isEqualTo(Multimedia);
-    }
 
     @Test
     void delete() {

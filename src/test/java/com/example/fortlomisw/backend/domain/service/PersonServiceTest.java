@@ -41,25 +41,7 @@ class PersonServiceTest {
         }
     }
 
-    @Test
-    void getbyNombreUsuarioOrEmail() {
-        long id=1;
-        byte[] bytes = "hello world".getBytes();
-        Person person = new Person();
-        person.setId(id);
-        person.setUsername("Person 1");
-        person.setRealname("Real name 1");
-        person.setLastname("Lastname 1");
-        person.setEmail("email 1");
-        person.setPassword("12345");
-        person.setContent(bytes);
-        person.setImageprofiletype("Type 1");
-        person.setTokenpassword("token 1");
 
-        when(personrepository.findById(id)).thenReturn(Optional.of(person));
-        Optional<Person> persona = personservice.getbyNombreUsuarioOrEmail(person.getUsername());
-        assertThat(persona).isEqualTo(persona);
-    }
 
     @Test
     void getByTokenPassword() {
@@ -76,9 +58,9 @@ class PersonServiceTest {
         person.setImageprofiletype("Type 1");
         person.setTokenpassword("token 1");
 
-        when(personrepository.findById(id)).thenReturn(Optional.of(person));
+        when(personrepository.findByTokenpassword(person.getTokenpassword())).thenReturn(Optional.of(person));
         Optional<Person> persona = personservice.getByTokenPassword(person.getTokenpassword());
-        assertThat(persona).isEqualTo(persona);
+        assertThat(persona.get()).isEqualTo(person);
     }
 
     @Test

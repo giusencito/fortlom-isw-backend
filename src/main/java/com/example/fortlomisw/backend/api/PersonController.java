@@ -8,6 +8,7 @@ import com.example.fortlomisw.backend.mapping.PersonMapper;
 import com.example.fortlomisw.backend.resource.Multimedia.MultimediaResource;
 import com.example.fortlomisw.backend.resource.Person.PersonResource;
 import com.example.fortlomisw.backend.resource.Person.UpdatePersonResource;
+import com.example.fortlomisw.shared.exception.Message;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,12 +50,12 @@ public class PersonController {
 
     @ApiOperation(value="getImage",notes = "Esta consulta nos retorna la imagen del usuario segun el id de este")
     @GetMapping("/users/onlyimage/{userID}")
-    public ResponseEntity<byte[]> getImage (@PathVariable("userID") Long userID) throws IOException{
+    public ResponseEntity<byte[]> getImage (@PathVariable("userID") Long userID) throws Message {
         return  personService.getprofileimage(userID);
     }
     @ApiOperation(value="getImagecontent",notes = "Esta consulta nos retorna los detalles de la imagen del usuario segun el id de este")
     @GetMapping("/users/image/{userID}")
-    public ImageModel getImagecontent (@PathVariable("userID") Long userID) throws IOException{
+    public ImageModel getImagecontent (@PathVariable("userID") Long userID) throws IOException, Message {
         return  personService.getImageDetails(userID);
     }
 

@@ -6,7 +6,10 @@ import com.example.fortlomisw.backend.domain.model.entity.Person;
 import com.example.fortlomisw.backend.domain.service.PersonService;
 import com.example.fortlomisw.backend.security.Dto.ChangePassword;
 import com.example.fortlomisw.backend.security.Dto.EmailValues;
+import com.example.fortlomisw.backend.service.PersonServiceImpl;
 import com.example.fortlomisw.shared.exception.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -50,7 +53,7 @@ public class EmailService {
     private static final String subject = "Change password";
 
 
-
+    private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
     public ResponseEntity<?> sendEmailTemplate(EmailValues dto){
         Optional<Person> usuarioOpt = personaService.getbyNombreUsuarioOrEmail(dto.getMailTo());
         if(!usuarioOpt.isPresent())
@@ -87,8 +90,8 @@ public class EmailService {
 
 
             javaMailSender.send(message);
-        }catch (MessagingException e){
-            e.printStackTrace();
+        }catch (Exception e){
+            logger.info("context", e);
         }
 
 

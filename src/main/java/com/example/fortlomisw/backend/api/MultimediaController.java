@@ -6,6 +6,7 @@ import com.example.fortlomisw.backend.mapping.MultimediaMapper;
 import com.example.fortlomisw.backend.resource.Multimedia.CreateMultimediaResource;
 import com.example.fortlomisw.backend.resource.Multimedia.MultimediaResource;
 import com.example.fortlomisw.backend.resource.Multimedia.UpdateMultimediaResource;
+import com.example.fortlomisw.shared.exception.Message;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.io.ByteArrayResource;
@@ -48,13 +49,13 @@ public class MultimediaController {
     }
     @ApiOperation(value = "Get Details of an image",notes = "Este consulta consiste en obtener los detalles de una imagen segun  su ID")
     @GetMapping("/multimedias/image/info/{multimediaId}")
-    public ImageModel getImageDetails (@PathVariable("multimediaId") Long multimediaId) throws IOException{
+    public ImageModel getImageDetails (@PathVariable("multimediaId") Long multimediaId) throws IOException, Message {
         return  multimediaService.getImageDetails(multimediaId);
     }
 
     @ApiOperation(value = "Get an image",notes = "Este consulta consiste en obtener la imagen segun su ID")
     @GetMapping("/multimedias/image/{multimediaId}")
-    public ResponseEntity<byte[]> getImage (@PathVariable("multimediaId") Long multimediaId) throws IOException{
+    public ResponseEntity<byte[]> getImage (@PathVariable("multimediaId") Long multimediaId) throws IOException, Message {
         return  multimediaService.getImage(multimediaId);
     }
 

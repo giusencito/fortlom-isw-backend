@@ -221,11 +221,12 @@ class RateServiceTest {
         List<Rate> rateList= new ArrayList<>();
         rateList.add(rate);
 
-        when(raterepository.findAll()).thenReturn(rateList);
+
         when(fanaticrepository.findById(id)).thenReturn(Optional.of(fanatic));
         when(artistrepository.findById(id)).thenReturn(Optional.of(artist));
+        when(raterepository.findByFanaticId(fanatic.getId())).thenReturn(rateList);
         List<Rate> rates = rateservice.ratesByFanaticId(fanatic.getId());
-        assertThat(rates).isEqualTo(rates);
+        assertThat(rates).isEqualTo(rateList);
     }
 
     @Test
@@ -258,11 +259,12 @@ class RateServiceTest {
         List<Rate> rateList= new ArrayList<>();
         rateList.add(rate);
 
-        when(raterepository.findAll()).thenReturn(rateList);
+
         when(fanaticrepository.findById(id)).thenReturn(Optional.of(fanatic));
         when(artistrepository.findById(id)).thenReturn(Optional.of(artist));
+        when(raterepository.findByArtistId(id)).thenReturn(rateList);
         List<Rate> rates = rateservice.ratesByArtistId(artist.getId());
-        assertThat(rates).isEqualTo(rates);
+        assertThat(rates).isEqualTo(rateList);
     }
 
     @Test

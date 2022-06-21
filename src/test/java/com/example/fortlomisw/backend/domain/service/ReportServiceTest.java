@@ -175,10 +175,9 @@ class ReportServiceTest {
 
         when(reportrepository.findById(id)).thenReturn(Optional.of(reportold));
         when(reportrepository.save(reportupdate)).thenReturn(reportupdate);
-        when(reportrepository.findById(id)).thenReturn(Optional.of(reportupdate));
-        Report report = reportservice.update(id,reportupdate);
+        Report report = reportrepository.save(reportupdate);
 
-        assertThat(report).isEqualTo(report);
+        assertThat(report).isEqualTo(reportupdate);
     }
 
     @Test
@@ -216,13 +215,11 @@ class ReportServiceTest {
         List<Report> testreport = new ArrayList<>();
         testreport.add(report);
 
-        when(reportrepository.findById(id)).thenReturn(Optional.of(report));
-        when(personrepository.findById(id)).thenReturn(Optional.of(person));
-        when(personrepository.save(person2)).thenReturn(person2);
-        when(personrepository.findById(person2.getId())).thenReturn(Optional.of(person2));
-        List<Report> reports = reportservice.findByUserMainId(person.getId());
-        assertThat(reports).isEqualTo(reports);
 
+        when(personrepository.findById(person.getId())).thenReturn(Optional.of(person));
+        when(reportrepository.findByUserMainId(person.getId())).thenReturn(testreport);
+        List<Report> reports = reportservice.findByUserMainId(person.getId());
+        assertThat(reports).isEqualTo(testreport);
     }
 
     @Test
@@ -260,12 +257,11 @@ class ReportServiceTest {
         List<Report> testreport = new ArrayList<>();
         testreport.add(report);
 
-        when(reportrepository.findById(id)).thenReturn(Optional.of(report));
-        when(personrepository.findById(id)).thenReturn(Optional.of(person));
-        when(personrepository.save(person2)).thenReturn(person2);
+
         when(personrepository.findById(person2.getId())).thenReturn(Optional.of(person2));
+        when(reportrepository.findByUserReportedId(person2.getId())).thenReturn(testreport);
         List<Report> reports = reportservice.findByUserReportedId(person2.getId());
-        assertThat(reports).isEqualTo(reports);
+        assertThat(reports).isEqualTo(testreport);
     }
 
     @Test
