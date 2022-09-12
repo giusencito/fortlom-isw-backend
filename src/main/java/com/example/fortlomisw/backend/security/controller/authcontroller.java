@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.text.ParseException;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/auth")
 public class authcontroller {
 
